@@ -1,0 +1,185 @@
+<html ng-app="dbox">
+<head>
+	<% include ./common/meta %>
+
+    <title><%= title %></title>   
+	<% include ./common/css %> 
+
+	<% include ./common/javascript %>
+	<script src="./javascripts/jquery-ui.min.js?v=<%-GLOBAL.environment_settings.version%>"></script>
+	<script src="./javascripts/views/homeApps.js?v=<%-GLOBAL.environment_settings.version%>"></script>
+	<script>
+		var limitData = <%-GLOBAL.HOMESCREEN_LIMIT.APPS.MAX_INSERT%>;
+	</script>
+</head>
+<body>
+    <% include ./common/sidebar %>
+
+    <div class="container" id="container" data-ng-controller="appListController">
+	   <div class="col-xs-12 pside0">
+            <div class="title text-muted">
+                <div class="pull-left"><h2><i class="<%= icon %>"></i> <%= title %></h2></div>
+				<div class="clearfix"></div>
+            </div>
+             
+			<hr/>
+		</div>
+		<div class="clearfix"></div>
+
+	   <div class="col-lg-7 col-md-7">
+
+
+			<div class="panel panel-default">
+				<div class="panel-heading">Filter information</div>
+				<div class="panel-body">
+
+                    <div class="col-xs-12 col-lg-5 mb10">
+                        <div class="input-group">
+                            <span class="input-group-addon">Country</span>
+                            <select class="form-control" data-ng-model="filter.country" data-ng-change="search()">
+                                <option data-ng-repeat="data in countries" data-ng-selected="data.code == filter.country" value="{{data.code}}">{{data.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+					<div class="col-xs-12 col-lg-4 mb10">
+						<div class="input-group">
+							<span class="input-group-addon">Status</span>
+							<select class="form-control" data-ng-model="filter.status" data-ng-change="search()">
+								<option value="1">Active</option>
+								<option value="0">Inactive</option>
+							</select>
+						</div>
+					</div>
+						
+					<div class="col-xs-12 col-lg-2 mb10">
+						<button type="button" class="btn btn-primary" data-ng-click="search();">Go</button>
+					</div>
+
+				</div>
+			</div>
+			<div class="panel panel-default">
+				<div class="panel-body hM500">
+                    <div class="text-left pull-left"> *limit screen apps <b><%-GLOBAL.HOMESCREEN_LIMIT.APPS.MAX_VIEW%></b> items to users</div>
+                    <div class="text-right pull-right">Total <b class="pgCounter">{{apps.length}}</b> items</div>
+					
+					<div class="clearfix"></div>
+					<table class="table table-striped table-hover">
+						<thead>
+							<tr>
+								<th>&nbsp;</th>
+								<th>Name</th>
+								<th>Key</th>
+								<th>Status</th>
+								<th class="hidden-xs">&nbsp;</th>
+							</tr>
+						</thead>
+						<tbody class="app-order">
+                            <tr data-ng-show="apps == null"><td colspan="100%" class="text-center"><img src="images/loading.gif" /></td></tr>
+                            <tr data-ng-show="apps.length == 0"><td colspan="100%" class="text-center">It does not have any content</td></tr>
+							<tr id="{{data._id}}" data-ng-repeat="data in apps">
+								<td width="45"><div class="sThumb zoom" style="background-image:url('{{data.thumb}}')"></div></td>
+								<td>{{data.name}}</td>
+								<td>{{data.key}}</td>
+                                <td><div data-ng-bind-html="data.status | status | unsafe"></div></td>
+								<td class="text-right hidden-xs" width="85">
+									<a href="javascript:;" data-ng-click="edit(data);"><span class="glyphicon glyphicon-pencil"></span></a>
+									<a href="javascript:;" data-ng-click="delete(data);"><span class="glyphicon glyphicon-trash"></span></a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+	   </div>
+
+	   <div id="appModal" class="col-lg-5 col-md-5 hidden-xs hidden-sm" data-ng-controller="appModalController">
+		   
+			<div data-ng-if="!allowInsert">
+				<div class="pt15 alert alert-warning" role="alert">
+					<span>I'm sorry, you can't add more <b>apps</b>. The limit is <%-GLOBAL.HOMESCREEN_LIMIT.APPS.MAX_INSERT%> item(s) by country</span>
+				</div>
+			</div>
+			
+			<div class="panel panel-default">
+				<div class="panel-body">
+					
+					<div class="pt15 alert alert-warning" data-ng-hide="app.error == null" role="alert">
+						<div data-ng-bind-html="app.error | unsafe"></div>
+					</div>
+              
+					<div class="form-group" data-ng-if="app._id">
+						<label>Id</label>
+						<span>{{app._id}}</span>
+					</div>
+              
+					<div class="clearfix"></div>
+					
+					<div class="col-md-4 pr10 text-center pl0">
+                        <div class="pic" style="background:url('{{app.thumb | getImage}}');"></div>
+                        <div class="clearfix"></div>
+                        <a href="javascript:;" onclick="getFileThumb('#appThumb')">edit thumb</a>
+                        <input id="appThumb" type="file" class="hidden" accept="image/*" data-key="appModal.app.thumb" />
+					</div>
+					<div class="col-md-8 pside0">
+						<label>Name</label>
+						<input type="text" class="form-control" placeholder="Name" data-ng-model="app.name" maxlength="45" />
+					</div>
+					<div class="col-md-8 pside0 pull-right">
+						<label>Key</label>
+						<input type="text" class="form-control" placeholder="Key" data-ng-model="app.key" maxlength="45" />
+					</div>
+                    <div class="clearfix"></div>
+
+					<div class="form-group">
+						<label class="pull-left">Intent</label>
+						<i>&nbsp;* use break line or comma to add a new parameter</i>
+						<div class="clearfix"></div>
+						<textarea class="form-control" data-ng-model="app.intent" rows="5"></textarea>
+					</div>
+					<div class="form-group">
+						<label>Description</label>
+						<textarea class="form-control" data-ng-model="app.description" rows="5"></textarea>
+					</div>
+					
+					<div class="form-group col-xs-6 pside0">
+						<label>Status</label>
+						<select data-ng-model="app.status" class="form-control w150" data-bool-value="">
+							<option value="true" selected="">Active</option>
+							<option value="false">Inactive</option>
+						</select>
+					</div>
+					<div class="form-group col-xs-6 pull-right">
+						<label>Country</label> 
+                        <select class="form-control" data-ng-model="app.country">
+                            <option data-ng-repeat="data in countries" data-ng-selected="data.code == app.country" value="{{data.code}}">{{data.name}}</option>
+                        </select>
+					</div>
+                    
+					<div class="clearfix"></div>
+                    
+					<div class="form-group col-xs-6 pside0" data-ng-if="app.registration">
+						<label>Registration</label>
+						<span class="clearfix">{{app.registration | date:'MMM dd, yyyy'}}</span>
+					</div>
+                    
+                    
+					<div class="clearfix"></div>
+					<hr />
+					<div class="form-group text-right">
+						<button type="button" class="btn btn-default" data-ng-disabled="!(app.loader | isNullEmpty)" data-ng-hide="apps.length >= limitData" data-ng-click="edit();">New app</button>
+						<button type="button" class="btn btn-primary" data-ng-disabled="!(app.loader | isNullEmpty)" data-ng-click="save();">Save</button>
+						<div class="pull-left" data-ng-hide="app.loader == null"><img src="images/loading.gif" /></div>
+						<div class="clearfix"></div>
+					</div>
+              
+					<div class="clearfix"></div>
+				</div>
+			</div>
+	   </div>
+
+    </div>
+	
+    <% include ./modal/basic %>
+</body>
+</html>

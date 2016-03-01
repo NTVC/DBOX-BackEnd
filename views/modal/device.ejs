@@ -1,0 +1,193 @@
+<div id="deviceModal" class="modal fade" data-backdrop="static" data-ng-controller="deviceModalController">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"><i class="<%=icon%>"></i> <%=title%></h4>
+            </div>
+            <div class="modal-body">
+              
+              <div class="pt15 alert alert-warning" data-ng-hide="device.error == null" role="alert">
+                  <div data-ng-bind-html="device.error | unsafe"></div>
+              </div>
+              
+              <div class="clearfix"></div>
+
+              <div class="form-group" data-ng-if="device._id">
+                <label>Id</label>
+                <span>{{device._id}}</span>
+              </div>
+              
+              <div class="form-group">
+                <label>Mac Address</label>
+                <div class="clearfix"></div>
+                <input type="text" class="form-control w200 pull-left" placeholder="Mac Address" data-ng-model="device.ethMac" data-ng-keypress="device.ethMac = (device.ethMac | mac)" maxlength="17" data-ng-blur="checkMac();" />
+                <button type="button" class="btn btn-primary pull-left ml15" data-ng-disabled="device.mac_load != null" data-ng-click="checkMac();">Check</button>
+                <div class="pull-left" data-ng-hide="device.mac_load == null">
+                  <img src="images/loading.gif" />
+                </div>
+
+                <div class="pull-left ml15 mt5" data-ng-show="device.check_mac != null && admin.check_mac != 1">
+                  <i>{{device.check_mac}}</i>
+                </div>
+                <div class="clearfix"></div>
+              </div>
+
+              <div class="form-group">
+                <label>wMac Address</label>
+                <input type="text" class="form-control" placeholder="wMac Address" data-ng-model="device.wMac" data-ng-keypress="device.wMac = (device.wMac | mac)" maxlength="17" />
+              </div>
+
+              <div class="form-group">
+                <label>Model Number</label>
+                <input type="text" class="form-control" placeholder="Model Number" data-ng-model="device.model_number" maxlength="45" />
+              </div>
+              <div class="form-group">
+                <label>Uid</label>
+                <input type="text" class="form-control" placeholder="Uid" data-ng-model="device.uid" maxlength="45" />
+              </div>
+
+              <div class="clearfix"></div>
+
+              <div class="form-group col-lg-6 pl0">
+                <label>Version</label>
+                <select data-ng-model="device.version_code" class="form-control">
+                  <option data-ng-repeat="n in deviceVersions" value="{{n._id}}">{{n.title}}</option>
+                </select>
+              </div>
+
+              <div class="form-group col-lg-6 pl0 pr0">
+                <label>Status</label>
+                <select data-ng-model="device.status" class="form-control"  data-bool-value="">
+                  <option value="true">Active</option>
+                  <option value="false">Inactive</option>
+                </select>
+              </div>
+
+              <div class="form-group" data-ng-if="device.registration">
+                <label>Registration</label>
+                <span>{{device.registration | date:'MMM dd, yyyy'}}</span>
+              </div>
+
+
+              <div class="form-group col-lg-6 pl0" data-ng-if="device.customer.id">
+                <label>Owner Id</label>
+                <span class="clearfix"><a href="/customer?c={{device.customer.id}}">{{device.customer.id}}</a></span>
+              </div>
+
+              <div class="form-group col-lg-6 pside0" data-ng-if="device.customer.name">
+                <label>Owner Name</label>
+                <span class="clearfix">{{device.customer.name}}</span>
+              </div>
+              <div class="form-group col-lg-6 pside0" data-ng-if="device.customer">
+                <button type="button" class="btn btn-danger" data-ng-disabled="device.loader != null" data-ng-click="device.customer = null">Delete Customer</button>
+              </div>
+
+              <div class="clearfix"></div>
+            </div>
+            <div class="modal-footer">
+              <div class="pull-left" data-ng-hide="device.loader == null"><img src="images/loading.gif" /></div>
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" data-ng-disabled="device.loader != null" data-ng-click="save();">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="deviceVersionsModal" class="modal fade" data-backdrop="static" data-ng-controller="deviceVersionsModalController">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"><i class="<%=icon%>"></i> <%=title%> Versions</h4>
+            </div>
+            <div class="modal-body hM350">
+              
+						  <table class="table table-striped table-hover">
+							    <thead>
+								      <tr>
+                          <th>&nbsp;</th>
+                          <th>Title</th>
+                          <th>Registration</th>
+                          <th>&nbsp;</th>
+								      </tr>
+							    </thead>
+							    <tbody>
+                      <tr data-ng-hide="deviceVersions != null" class="text-center">
+                          <td colspan="100%"><img src="images/loading.gif" /></td>
+                      </tr>
+								      <tr data-ng-repeat="data in deviceVersions" data-ng-if="deviceVersions">
+									        <td width="45"><div class="sThumb zoom" style="background-image:url('{{data.thumb}}')"></div></td>
+									        <td>{{data.title}}</td>
+									        <td>{{data.registration | date:'MMM dd, yyyy'}}</td>
+                          <td class="text-right" width="70">
+										          <a href="javascript:;" data-ng-click="edit(data);"><span class="glyphicon glyphicon-pencil"></span></a>
+										          <a href="javascript:;" data-ng-click="delete(data);"><span class="glyphicon glyphicon-trash"></span></a>
+									        </td>
+								      </tr>
+							    </tbody>
+						  </table>
+              
+              <div class="clearfix"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" data-ng-click="edit({});">New Version</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="deviceVersionModal" class="modal fade" data-backdrop="static" data-ng-controller="deviceVersionModalController">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"><i class="<%=icon%>"></i> <%=title%> Versions</h4>
+            </div>
+            <div class="modal-body">
+
+              <div class="pt15 alert alert-warning" data-ng-hide="deviceVersion.error == null" role="alert">
+                <div data-ng-bind-html="deviceVersion.error | unsafe"></div>
+              </div>
+
+              <div class="clearfix"></div>
+
+              <div class="form-group" data-ng-if="deviceVersion._id">
+                <label>Id</label>
+                <span>{{deviceVersion._id}}</span>
+              </div>
+
+              <div class="col-md-3 text-center">
+                <img src="{{deviceVersion.thumb | getImage}}" class="wMax deviceThumb" />
+                <div class="clearfix"></div>
+                <a href="javascript:;" data-ng-click="editThumb()">edit thumb</a>
+                <input id="deviceThumb" type="file" class="hidden" accept="image/*" data-key="deviceVersionModal.deviceVersion.thumb" />
+              </div>
+              <div class="col-md-9 pside0">
+                <label>Title</label>
+                <input type="text" class="form-control" placeholder="Title" data-ng-model="deviceVersion.title" maxlength="45" />
+              </div>
+
+              <div class="clearfix"></div>
+
+              <div class="form-group">
+                <label>Description</label>
+                <textarea class="form-control" rows="7" data-ng-model="deviceVersion.description" maxlength="1000"></textarea>
+              </div>
+
+              <div class="form-group" data-ng-if="deviceVersion.registration">
+                <label>Registration</label>
+                <span>{{deviceVersion.registration | date:'MMM dd, yyyy'}}</span>
+              </div>
+
+              <div class="clearfix"></div>
+            </div>
+            <div class="modal-footer">
+                <div class="pull-left" data-ng-hide="deviceVersion.loader == null"><img src="images/loading.gif" /></div>
+                <button type="button" class="btn btn-primary" data-ng-disabled="deviceVersion.loader != null" data-ng-click="save();">Save</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

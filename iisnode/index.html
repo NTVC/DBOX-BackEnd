@@ -1,0 +1,87 @@
+<html>
+<head>
+    <title>iisnode logs</title>
+    <style type="text/css">
+        body
+        {
+            font-family: "Trebuchet MS" , Arial, Helvetica, sans-serif;
+        }
+        table
+        {
+            border-collapse: collapse;
+        }
+        td, th
+        {
+            border: 1px solid lightgray;
+            padding: 3px 7px 2px 7px;
+        }
+        th
+        {
+            text-align: left;
+            padding-top: 5px;
+            padding-bottom: 4px;
+            background-color: Gray;
+            color: #ffffff;
+        }
+        td.stderr
+        {
+            color: Red;
+        }
+    </style>
+</head>
+<body>
+    <table id="logFilesTable">
+        <tr>
+            <th>
+                Computer name
+            </th>
+            <th>
+                PID
+            </th>
+            <th>
+                Type
+            </th>
+            <th>
+                Created
+            </th>
+            <th>
+                Link
+            </th>
+        </tr>
+    </table>
+    <p id="lastUpdated"></p>
+    <script type="text/javascript">
+
+        // this is replaced with actual data at runtime by code in interceptor.js
+        var logFiles = [{"file":"MYAGENCYPAL-PC-3428-stderr-1446133283980.txt","computername":"MYAGENCYPAL-PC","pid":3428,"type":"stderr","created":1446133283980},{"file":"MYAGENCYPAL-PC-3428-stdout-1446133283974.txt","computername":"MYAGENCYPAL-PC","pid":3428,"type":"stdout","created":1446133283974},{"file":"MYAGENCYPAL-PC-3972-stderr-1446044420808.txt","computername":"MYAGENCYPAL-PC","pid":3972,"type":"stderr","created":1446044420808},{"file":"MYAGENCYPAL-PC-3972-stdout-1446044420802.txt","computername":"MYAGENCYPAL-PC","pid":3972,"type":"stdout","created":1446044420802},{"file":"MYAGENCYPAL-PC-4968-stderr-1446311730855.txt","computername":"MYAGENCYPAL-PC","pid":4968,"type":"stderr","created":1446311730855},{"file":"MYAGENCYPAL-PC-4968-stdout-1446311730578.txt","computername":"MYAGENCYPAL-PC","pid":4968,"type":"stdout","created":1446311730578},{"file":"MYAGENCYPAL-PC-5980-stderr-1446044485926.txt","computername":"MYAGENCYPAL-PC","pid":5980,"type":"stderr","created":1446044485926},{"file":"MYAGENCYPAL-PC-5980-stdout-1446044485920.txt","computername":"MYAGENCYPAL-PC","pid":5980,"type":"stdout","created":1446044485920},{"file":"MYAGENCYPAL-PC-6220-stderr-1446218265232.txt","computername":"MYAGENCYPAL-PC","pid":6220,"type":"stderr","created":1446218265232},{"file":"MYAGENCYPAL-PC-6220-stdout-1446218265224.txt","computername":"MYAGENCYPAL-PC","pid":6220,"type":"stdout","created":1446218265224},{"file":"MYAGENCYPAL-PC-6340-stderr-1446045380701.txt","computername":"MYAGENCYPAL-PC","pid":6340,"type":"stderr","created":1446045380701},{"file":"MYAGENCYPAL-PC-6340-stdout-1446045380695.txt","computername":"MYAGENCYPAL-PC","pid":6340,"type":"stdout","created":1446045380695},{"file":"MYAGENCYPAL-PC-6696-stderr-1446062276162.txt","computername":"MYAGENCYPAL-PC","pid":6696,"type":"stderr","created":1446062276162},{"file":"MYAGENCYPAL-PC-6696-stdout-1446062276117.txt","computername":"MYAGENCYPAL-PC","pid":6696,"type":"stdout","created":1446062276117},{"file":"MYAGENCYPAL-PC-7328-stderr-1446133221882.txt","computername":"MYAGENCYPAL-PC","pid":7328,"type":"stderr","created":1446133221882},{"file":"MYAGENCYPAL-PC-7328-stdout-1446133221875.txt","computername":"MYAGENCYPAL-PC","pid":7328,"type":"stdout","created":1446133221875},{"file":"MYAGENCYPAL-PC-7948-stderr-1446045255787.txt","computername":"MYAGENCYPAL-PC","pid":7948,"type":"stderr","created":1446045255787},{"file":"MYAGENCYPAL-PC-7948-stdout-1446045255781.txt","computername":"MYAGENCYPAL-PC","pid":7948,"type":"stdout","created":1446045255781},{"file":"MYAGENCYPAL-PC-804-stderr-1446133302757.txt","computername":"MYAGENCYPAL-PC","pid":804,"type":"stderr","created":1446133302757},{"file":"MYAGENCYPAL-PC-804-stdout-1446133302746.txt","computername":"MYAGENCYPAL-PC","pid":804,"type":"stdout","created":1446133302746},{"file":"MYAGENCYPAL-PC-984-stderr-1446045301867.txt","computername":"MYAGENCYPAL-PC","pid":984,"type":"stderr","created":1446045301867},{"file":"MYAGENCYPAL-PC-984-stdout-1446045301861.txt","computername":"MYAGENCYPAL-PC","pid":984,"type":"stdout","created":1446045301861}];
+        var lastUpdated = 1446311736345;
+        var date = new Date();
+
+        date.setTime(lastUpdated);
+        document.getElementById('lastUpdated').innerHTML = 'Index was last updated ' + date;
+
+        logFiles.sort(function (a, b) {
+            return b.created - a.created;
+        });
+
+        var logFilesTable = document.getElementById("logFilesTable");
+        for (var i = 0; i < logFiles.length; i++) {
+            var logFile = logFiles[i];
+            date.setTime(logFile.created);
+            var row = logFilesTable.insertRow(-1);
+            var computerNameCell = row.insertCell(0);
+            var pidCell = row.insertCell(1);
+            var typeCell = row.insertCell(2);
+            var dateCell = row.insertCell(3);
+            var logCell = row.insertCell(4);
+            computerNameCell.innerHTML = logFile.computername;
+            pidCell.innerHTML = logFile.pid.toString();
+            typeCell.innerHTML = logFile.type;
+            typeCell.setAttribute('class', logFile.type);
+            dateCell.innerHTML = date.toString();
+            logCell.innerHTML = '<a href="' + logFile.file + '">log</a>';
+        };
+
+    </script>
+</body>
+</html>

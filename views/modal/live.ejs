@@ -1,0 +1,81 @@
+<div id="liveModal" class="modal fade" data-backdrop="static" data-ng-controller="liveModalController">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">
+                  <i class="<%= icon %>"></i> <%= title %>
+                </h4>
+            </div>
+            <div class="modal-body">
+              
+              <div class="pt15 alert alert-warning" data-ng-hide="live.error == null" role="alert">
+                  <div data-ng-bind-html="live.error | unsafe"></div>
+              </div>
+              
+              <div class="form-group">
+                <label>Id</label>
+                <span>{{live._id}}</span>
+              </div>
+
+              <div class="clearfix"></div>
+
+              <div class="col-xs-12 col-lg-4 text-center">
+                <div class="pic" style="background:url('{{live.thumb | getImage}}');"></div>
+                <div class="clearfix"></div>
+                <a href="javascript:;" onclick="getFileThumb('#liveThumb')">edit thumb</a>
+                <input id="liveThumb" type="file" class="hidden" accept="image/*" data-key="liveModal.live.thumb" />
+              </div>
+
+              <div class="col-xs-12 col-lg-4 text-center">
+                <div class="pic" style="background:url('{{live.cover | getImage}}');"></div>
+                <div class="clearfix"></div>
+                <a href="javascript:;" onclick="getFileThumb('#liveCover')">edit cover</a>
+                <input id="liveCover" type="file" class="hidden" accept="image/*" data-key="liveModal.live.cover" />
+              </div>
+              
+              <div class="clearfix"></div>
+              
+              <div class="form-group">
+                <label>Name</label>
+                <input type="text" class="form-control" placeholder="Name" data-ng-model="live.name" maxlength="200" />
+              </div>
+              <div class="form-group">
+                <label>Url</label>
+                <input type="text" class="form-control" placeholder="Live Url" data-ng-model="live.url" maxlength="1000" />
+              </div>
+              
+              <div class="form-group">
+                <label>Description</label>
+                <textarea class="form-control" data-ng-model="live.description" rows="5"></textarea>
+              </div>
+
+              <div class="clearfix"></div>
+              
+              <div class="form-group pull-left mr15">
+                <label>Country</label>
+                <select class="form-control w200" data-ng-model="live.country">
+                  <option value="">Select</option>
+                  <option data-ng-repeat="data in countries" value="{{data.code}}">{{data.name}}</option>
+                </select>
+              </div>
+              
+              <div class="form-group">
+                <label>Status</label>
+                <select data-ng-model="live.active" class="form-control w150" data-bool-value="">
+                  <option value="true" selected>Active</option>
+                  <option value="false">Inactive</option>
+                </select>
+              </div>
+              
+              <div class="clearfix"></div>
+              
+            </div>
+            <div class="modal-footer">
+                <div class="pull-left" data-ng-hide="live.loader == null"><img src="images/loading.gif" /></div>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-ng-disabled="live.loader != null" data-ng-click="save();">Save</button>
+            </div>
+        </div>
+    </div>
+</div>

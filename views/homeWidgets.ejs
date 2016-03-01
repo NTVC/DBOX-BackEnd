@@ -1,0 +1,145 @@
+<html ng-app="dbox">
+<head>
+    <% include ./common/meta %>
+
+    <title><%= title %></title>
+    <% include ./common/css %>
+
+    <% include ./common/javascript %>
+    <script src="./javascripts/views/homeWidgets.js?v=<%-GLOBAL.environment_settings.version%>"></script>
+    <script>
+        var limitData = <%-GLOBAL.HOMESCREEN_LIMIT.WIDGETS%>;
+    </script>
+</head>
+<body>
+    <% include ./common/sidebar %>
+
+    <div class="container" id="container" data-ng-controller="widgetListController">
+
+        <div class="col-xs-12 pside0">
+            <div class="title text-muted">
+                <div class="pull-left"><h2><i class="<%= icon %>"></i> <%= title %></h2></div>
+                <div class="clearfix"></div>
+            </div>
+
+            <hr />
+        </div>
+        <div class="clearfix"></div>
+        <div class="col-lg-7 col-xs-12">
+
+            <div class="panel panel-default">
+                <div class="panel-heading">Filter information</div>
+                <div class="panel-body">
+
+                    <div class="col-xs-12 col-lg-5 mb10">
+                        <div class="input-group">
+                            <span class="input-group-addon">Country</span>
+                            <select class="form-control" data-ng-model="filter.country" data-ng-change="search()">
+                                <option data-ng-repeat="data in countries" data-ng-selected="data.code == filter.country" value="{{data.code}}">{{data.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-lg-4 mb10">
+                        <div class="input-group">
+                            <span class="input-group-addon">Status</span>
+                            <select class="form-control" data-ng-model="filter.status" data-bool-value="" data-ng-change="search()">
+                                <option value="1">Active</option>
+                                <option value="0">Inactive</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12 col-lg-2 mb10">
+                        <button type="button" class="btn btn-primary" data-ng-click="search();">Go</button>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <p class="text-right">Total <b class="pgCounter">{{widgets.length}}</b> items</p>
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Status</th>
+                                <th>Registration</th>
+                                <th>&nbsp;</th>
+                            </tr>
+                        </thead>
+                        <tbody class="widget-order">
+                            <tr data-ng-show="widgets == null"><td colspan="100%" class="text-center"><img src="images/loading.gif" /></td></tr>
+                            <tr data-ng-show="widgets.length == 0"><td colspan="100%" class="text-center">It does not have any content</td></tr>
+                            <tr id="{{data._id}}" data-ng-repeat="data in widgets">
+                                <td>{{data.name}}</td>
+                                <td><div data-ng-bind-html="data.status | status | unsafe"></div></td>
+                                <td>{{data.registration | date:'MMM dd, yyyy'}}</td>
+                                <td class="text-right" width="85">
+                                    <a href="javascript:;" data-ng-click="edit(data);"><span class="glyphicon glyphicon-pencil"></span></a>
+                                    <a href="javascript:;" data-ng-click="delete(data);"><span class="glyphicon glyphicon-trash"></span></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+        <div id="widgetModal" class="col-lg-5 col-xs-12 hidden-xs" data-ng-controller="widgetModalController">
+            
+            <div data-ng-if="!allowInsert">
+                <div class="pt15 alert alert-warning" role="alert">
+                    <span>I'm sorry, you can't add more <b>widgets</b>. The limit is <%-GLOBAL.HOMESCREEN_LIMIT.WIDGETS%> item(s) by country</span>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-body">
+
+                    <div class="pt15 alert alert-warning" data-ng-hide="widget.error == null" role="alert">
+                        <div data-ng-bind-html="widget.error | unsafe"></div>
+                    </div>
+
+                    <div class="form-group" data-ng-if="widget._id">
+                        <label>Id</label>
+                        <span>{{widget._id}}</span>
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input type="text" class="form-control" placeholder="Name" data-ng-model="widget.name" maxlength="45" />
+                    </div>
+                    <div class="form-group">
+                        <label>Html</label>
+                        <textarea class="form-control" data-ng-model="widget.html" rows="5"></textarea>
+                    </div>
+
+                    <div class="form-group col-xs-6 pside0">
+                        <label>Status</label>
+                        <select data-ng-model="widget.status" class="form-control w150" data-bool-value="">
+                            <option value="true" selected="">Active</option>
+                            <option value="false">Inactive</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-xs-6 pside0" data-ng-if="widget.registration">
+                        <label>Registration</label>
+                        <span class="clearfix">{{widget.registration | date:'MMM dd, yyyy'}}</span>
+                    </div>
+                    <div class="clearfix"></div>
+                    <hr />
+                    <div class="form-group text-right">
+                        <button type="button" class="btn btn-default" data-ng-disabled="!(widget.loader | isNullEmpty)" data-ng-click="edit();">New widget</button>
+                        <button type="button" class="btn btn-primary" data-ng-disabled="!(widget.loader | isNullEmpty)" data-ng-click="save();">Save</button>
+                        <div class="pull-left" data-ng-hide="widget.loader == null"><img src="images/loading.gif" /></div>
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <% include ./modal/basic %>
+</body>
+</html>

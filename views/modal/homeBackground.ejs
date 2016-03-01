@@ -1,0 +1,90 @@
+<div id="backgroundModal" class="modal fade" data-backdrop="static" data-ng-controller="backgroundModalController">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">
+                    <i class="<%= icon %>"></i> <%= title %>
+                </h4>
+            </div>
+        <div class="modal-body">
+        
+            <div class="pt15 alert alert-warning" data-ng-hide="background.error == null" role="alert">
+                <div data-ng-bind-html="background.error | unsafe"></div>
+            </div>
+        
+            <div class="form-group" data-ng-if="background._id">
+                <label>Id</label>
+                <span>{{background._id}}</span>
+            </div>
+        
+              <div class="clearfix"></div>
+            
+            <div class="col-xs-6 col-sm-4 text-center">
+                <div class="pic" style="background:url('{{background.home | getImage}}');"></div>
+                <div class="clearfix"></div>
+                <a href="javascript:;" onclick="getFileThumb('#backgroundHome')">edit home</a>
+                <input id="backgroundHome" type="file" class="hidden" accept="image/*" data-key="backgroundModal.background.home" />
+            </div>
+            
+            <div class="col-xs-6 col-sm-4 text-center">
+                <div class="pic" style="background:url('{{background.live | getImage}}');"></div>
+                <div class="clearfix"></div>
+                <a href="javascript:;" onclick="getFileThumb('#backgroundLive')">edit live TV</a>
+                <input id="backgroundLive" type="file" class="hidden" accept="image/*" data-key="backgroundModal.background.live" />
+            </div>
+            
+            <div class="col-xs-6 col-sm-4 text-center">
+                <div class="pic" style="background:url('{{background.community | getImage}}');"></div>
+                <div class="clearfix"></div>
+                <a href="javascript:;" onclick="getFileThumb('#backgroundCommunity')">edit community</a>
+                <input id="backgroundCommunity" type="file" class="hidden" accept="image/*" data-key="backgroundModal.background.community" />
+            </div>
+            
+            <div class="col-xs-6 col-sm-4 text-center">
+                <div class="pic" style="background:url('{{background.tvseries | getImage}}');"></div>
+                <div class="clearfix"></div>
+                <a href="javascript:;" onclick="getFileThumb('#backgroundTvSeries')">edit tv series</a>
+                <input id="backgroundTvSeries" type="file" class="hidden" accept="image/*" data-key="backgroundModal.background.tvseries" />
+            </div>
+            
+            <div class="col-xs-6 col-sm-4 text-center">
+                <div class="pic" style="background:url('{{background.youtuber | getImage}}');"></div>
+                <div class="clearfix"></div>
+                <a href="javascript:;" onclick="getFileThumb('#backgroundYoutuber')">edit youtuber</a>
+                <input id="backgroundYoutuber" type="file" class="hidden" accept="image/*" data-key="backgroundModal.background.youtuber" />
+            </div>
+            
+            <div class="clearfix"></div>
+            <div class="clearfix mt15"></div>
+        
+            <div class="col-xs-12 col-sm-4">
+                <label>Country</label>
+                <select class="form-control" data-ng-model="background.country">
+                    <option value="">Select</option>
+                    <option data-ng-repeat="data in countries" value="{{data.code}}">{{data.name}}</option>
+                </select>
+            </div>
+            <div class="col-xs-12 col-sm-4">
+                <label>Status</label>
+                <select data-ng-model="background.status" class="form-control" data-bool-value="">
+                    <option value="true" selected>Active</option>
+                    <option value="false">Inactive</option>
+                </select>
+            </div>
+            <div class="col-xs-12 col-sm-4" data-ng-if="background.registration">
+                <label>Registration</label>
+                <span class="clearfix">{{background.registration | date:'MMM dd, yyyy'}}</span>
+            </div>
+        
+            <div class="clearfix"></div>
+        
+        </div>
+        <div class="modal-footer">
+            <div class="pull-left" data-ng-hide="background.loader == null"><img src="images/loading.gif" /></div>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" data-ng-disabled="background.loader != null" data-ng-click="save();">Save</button>
+        </div>
+    </div>
+    </div>
+</div>

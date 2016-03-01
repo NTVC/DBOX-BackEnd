@@ -1,0 +1,184 @@
+<div id="adminModal" class="modal fade" data-ng-controller="adminModalController" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">
+                    <i class="<%= icon %>"></i> <%= title %>
+                </h4>
+            </div>
+            <div class="modal-body">
+            
+                <div class="pt15 alert alert-warning" data-ng-hide="admin.error == null" role="alert">
+                    <div data-ng-bind-html="admin.error | unsafe"></div>
+                </div>
+            
+                <div class="form-group">
+                    <label>Id</label>
+                    <span>{{admin._id}}</span>
+                </div>
+            
+                <div class="clearfix"></div>
+            
+                <div class="form-group col-lg-6 pl0">
+                    <label>First Name</label>
+                    <input type="text" class="form-control" placeholder="First Name" data-ng-model="admin.firstname" maxlength="45" />
+                </div>
+                <div class="form-group col-lg-6 pl0 pr0">
+                    <label>Last Name</label>
+                    <input type="text" class="form-control" placeholder="Last Name" data-ng-model="admin.lastname" maxlength="45" />
+                </div>
+            
+                <div class="clearfix"></div>
+            
+                <div class="form-group">
+                    <label>Username</label>
+                    <div class="clearfix"></div>
+                    <input type="text" class="form-control w150 pull-left" placeholder="Username" data-ng-model="admin.username" data-ng-blur="checkUsername();" maxlength="45" />
+                    <button type="button" class="btn btn-primary pull-left ml15" data-ng-disabled="admin.username_load != null" data-ng-click="checkUsername();">Check</button>
+                    <div class="pull-left" data-ng-hide="admin.username_load == null">
+                        <img src="images/loading.gif" />
+                    </div>
+                
+                    <div class="pull-left ml15 mt5" data-ng-show="admin.check_username != null && admin.check_username != 1">
+                        <i>{{admin.check_username}}</i>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="form-group">
+                    <label>E-mail</label>
+                    <input type="text" class="form-control" placeholder="E-mail" data-ng-model="admin.mail" maxlength="100" />
+                </div>
+                <div class="form-group">
+                    <label>Phone</label>
+                    <input type="text" class="form-control" placeholder="Phone" data-ng-model="admin.phone" maxlength="45" />
+                </div>
+            
+                <div class="clearfix"></div>
+            
+                <div class="form-group col-lg-6 pl0 pr5">
+                    <label>Password</label>
+                    <input type="password" class="form-control" placeholder="Password" data-ng-model="admin._pass" maxlength="45" />
+                </div>
+                <div class="form-group col-lg-6 pr0">
+                    <label>Reenter Password</label>
+                    <input type="password" class="form-control" placeholder="Reenter Password" data-ng-model="admin._rpass" maxlength="45" />
+                </div>
+            
+                <div class="clearfix"></div>
+            
+                <div class="form-group">
+                    <label>Status</label>
+                    <select data-ng-model="admin.status" class="form-control w150" data-bool-value="">
+                        <option value="true" selected>Active</option>
+                        <option value="false">Inactive</option>
+                    </select>
+                </div>
+            
+                <div class="clearfix"></div>
+            
+                <div class="panel panel-default">
+                    <div class="panel-heading">Permissions</div>
+                    <div class="panel-body">
+                    
+                        <div class="clearfix"></div>
+                        <b>Basic</b>
+                        <hr />
+                        <div class="clearfix"></div>
+                        
+                        <div class="col-lg-6">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" data-ng-model="admin.tvseries" data-ng-checked="admin.superadmin || admin.tvseries" /> TV Series
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" data-ng-model="admin.community" data-ng-checked="admin.superadmin || admin.community" /> Community
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" data-ng-model="admin.movie" data-ng-checked="admin.superadmin || admin.movie" /> Movie
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" data-ng-model="admin.customer" data-ng-checked="admin.superadmin || admin.customer" /> Customer
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" data-ng-model="admin.device" data-ng-checked="admin.superadmin || admin.device" /> Device
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="clearfix"></div>
+                        <b>Advanced</b>
+                        <hr />
+                        <div class="clearfix"></div>
+                        <div class="col-lg-6">
+                            <div class="checkbox">
+                            <label>
+                                <input type="checkbox" data-ng-model="admin.superadmin" /> Superadmin
+                            </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" data-ng-model="admin.homeapps" data-ng-checked="admin.superadmin || admin.homeapps" /> Apps
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" data-ng-model="admin.homebackground" data-ng-checked="admin.superadmin || admin.homebackground" /> Backgrounds
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" data-ng-model="admin.homesponsors" data-ng-checked="admin.superadmin || admin.homesponsors" /> Sponsors
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" data-ng-model="admin.homesupport" data-ng-checked="admin.superadmin || admin.homesupport" /> Support
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" data-ng-model="admin.homebanners" data-ng-checked="admin.superadmin || admin.homebanners" /> Banners
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" data-ng-model="admin.homehighlights" data-ng-checked="admin.superadmin || admin.homehighlights" /> Highlights
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" data-ng-model="admin.homemenu" data-ng-checked="admin.superadmin || admin.homemenu" /> Menu
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" data-ng-model="admin.homewidgets" data-ng-checked="admin.superadmin || admin.homewidgets" /> Widgets
+                                </label>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            
+            </div>
+            <div class="modal-footer">
+                <div class="pull-left" data-ng-hide="admin.loader == null"><img src="images/loading.gif" /></div>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-ng-disabled="admin.loader != null" data-ng-click="save();">Save</button>
+            </div>
+        </div>
+    </div>
+</div>

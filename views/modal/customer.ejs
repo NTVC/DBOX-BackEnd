@@ -1,0 +1,317 @@
+<div id="customerModal" class="modal fade" data-backdrop="static" data-ng-controller="customerModalController">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"><i class="<%=icon%>"></i> <%=title%></h4>
+            </div>
+            <div class="modal-body">
+              
+              <div class="pt15 alert alert-warning" data-ng-hide="customer.error == null" role="alert">
+                  <div data-ng-bind-html="customer.error | unsafe"></div>
+              </div>
+              
+              <div class="clearfix"></div>
+
+              <div class="col-xs-12 pside0">
+                <div class="panel panel-default">
+
+                  <div class="panel-heading">Basic Info</div>
+                  <div class="panel-body">
+                    <div class="form-group">
+                      <label>Id</label>
+                      <span>{{customer._id}}</span>
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <div class="form-group col-lg-6 pl0">
+                      <label>First Name</label>
+                      <input type="text" class="form-control" placeholder="First Name" data-ng-model="customer.firstname" maxlength="45" />
+                    </div>
+                    <div class="form-group col-lg-6 pl0 pr0">
+                      <label>Last Name</label>
+                      <input type="text" class="form-control" placeholder="Last Name" data-ng-model="customer.lastname" maxlength="45" />
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <div class="form-group col-lg-6 pl0">
+                      <label>E-mail</label>
+                      <input type="text" class="form-control" placeholder="E-mail" data-ng-model="customer.mail" maxlength="100" />
+                    </div>
+                    <div class="form-group col-lg-6 pl0 pr0">
+                      <label>Phone</label>
+                      <input type="text" class="form-control" placeholder="Phone" data-ng-model="customer.phone" maxlength="45" />
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <div class="form-group">
+                      <label>Language</label>
+                      <div class="clearfix"></div>
+                      <div ng-repeat="data in languages" class="col-xs-12 col-md-4 col-lg-4 pside0">
+                        <label class="text-ub">
+                          <input
+                            type="checkbox"
+                            name="languages[]"
+                            value="data.code"
+                            ng-checked="customer.language.indexOf(data.code) > -1"
+                            ng-click="toggleSelection(data.code)" />
+                          {{data.name}}
+                        </label>
+                      </div>
+                      <div class="clearfix"></div>
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <div class="form-group col-lg-6 pl0">
+                      <label>Status</label>
+                      <select data-ng-model="customer.status" class="form-control" data-bool-value="">
+                        <option value="true" selected="">Active</option>
+                        <option value="false">Inactive</option>
+                      </select>
+                    </div>
+
+                    <div class="form-group col-lg-6 pl0 pr0" data-ng-if="customer.registration">
+                      <label>Registration</label>
+                      <span class="clearfix">{{customer.registration | date:'MMM dd, yyyy'}}</span>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-xs-12 pside0">
+                <div class="panel panel-default">
+                  <div class="panel-heading">Address</div>
+                  <div class="panel-body">
+
+                    <div class="form-group col-lg-12 pl0 pr0">
+                        <label>Search</label>
+                        <input type="text" class="form-control" id="autocomplete" onFocus="geolocate()" placeholder="Enter your address" />
+                    </div>
+                    <div class="form-group col-lg-3 pl0">
+                        <label>Number</label>
+                        <input id="street_number" type="text" class="form-control" placeholder="Number" data-ng-model="customer.address.number" maxlength="45" />
+                    </div>
+                    <div class="form-group col-lg-9 pl0 pr0">
+                      <label>Street</label>
+                      <input id="route" type="text" class="form-control" placeholder="Street" data-ng-model="customer.address.street" />
+                    </div>
+
+                    <div class="clearfix"></div>
+                    
+                    <div class="form-group col-lg-12 pl0 pr0">
+                        <label>City</label>
+                        <input id="locality" type="text" class="form-control" placeholder="City" data-ng-model="customer.address.city" />
+                    </div>
+
+                    <div class="clearfix"></div>
+                    
+                    <div class="form-group col-lg-6 pl0">
+                      <label>State</label>
+                      <input id="administrative_area_level_1" type="text" class="form-control" placeholder="State" data-ng-model="customer.address.state" />
+                    </div>
+
+                    <div class="form-group col-lg-6 pl0 pr0">
+                      <label>Zip Code</label>
+                      <input id="postal_code" type="text" class="form-control" placeholder="Zip Code" data-ng-model="customer.address.zipcode" maxlength="45" />
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <div class="form-group col-lg-6 pl0">
+                      <label>Complement</label>
+                      <input type="text" class="form-control" placeholder="Complement" data-ng-model="customer.address.complement" />
+                    </div>
+                    
+                    <div class="form-group col-lg-6 pl0">
+                      <label>Country</label>
+                      <select id="country" class="form-control" data-ng-model="customer.address.country">
+                        <option data-ng-repeat="data in countries" value="{{data.code}}">{{data.name}}</option>
+                      </select>
+                    </div>
+                  
+                  </div>
+                </div>
+              </div>
+
+              <div class="clearfix"></div>
+            </div>
+            <div class="modal-footer">
+                <div class="pull-left" data-ng-hide="customer.loader == null"><img src="images/loading.gif" /></div>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-ng-disabled="customer.loader != null" data-ng-click="save();">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="deviceModal" class="modal fade" data-backdrop="static" data-ng-controller="deviceModalController">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">
+          <i class="<%=icon%>"></i> <%=title%>
+        </h4>
+      </div>
+      <div class="modal-body">
+
+        <div class="col-xs-12 col-lg-6 pside0">
+          <div class="form-group">
+            <label>Id</label>
+            <span>{{customer._id}}</span>
+          </div>
+
+          <div class="form-group" data-ng-if="customer.firstname">
+            <label>Name</label>
+            <span class="clearfix">{{customer.firstname + ' ' + customer.lastname}}</span>
+          </div>
+
+          <div class="form-group" data-ng-if="customer.mail">
+            <label>E-mail</label>
+            <span class="clearfix">{{customer.mail}}</span>
+          </div>
+        </div>
+        <div class="col-xs-12 col-lg-6 pside0">
+          <div class="form-group" data-ng-if="customer.phone">
+            <label>Phone</label>
+            <span class="clearfix">{{customer.phone}}</span>
+          </div>
+        
+          <div class="form-group" data-ng-if="customer.registration">
+            <label>Registration</label>
+            <span class="clearfix">{{customer.registration | date:'MMM dd, yyyy'}}</span>
+          </div>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="panel panel-default hM500">
+          <div class="panel-heading">Customer's device(s)</div>
+          <div class="panel-body">
+            <table class="table table-striped table-hover">
+              <thead>
+                <tr>
+                  <th>Mac</th>
+                  <th>Registration</th>
+                  <th>Status</th>
+                  <th>&nbsp;</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr data-ng-if="(devices | isNullEmpty) && (loader | isNullEmpty)" class="text-center">
+                  <td colspan="100%">
+                    <p>{{customer.firstname}} does not have any device.</p>
+                  </td>
+                </tr>
+                <tr data-ng-if="loader" class="text-center">
+                  <td colspan="100%" class="text-center">
+                    <img src="images/loading.gif" />
+                  </td>
+                </tr>
+                <tr data-ng-repeat="data in devices">
+                    <td><a href="/device?e={{data.ethMac}}">{{data.ethMac}}</a></td>
+                    <td>{{data.registration | date:'MMM dd, yyyy'}}</td>
+                    <td><span class="text-{{data.status === true ? 'success' : 'danger'}}">{{data.status === true ? "Active" : "Inactive"}}</span></td>
+				    <td class="text-right" width="70">
+					    <a href="javascript:;" data-ng-click="delete(data);"><span class="glyphicon glyphicon-trash"></span></a>
+				    </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal" data-ng-click="newDevice();">New Device</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="searchDeviceModal" class="modal fade" data-backdrop="static" data-ng-controller="searchDeviceModalController">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">
+          <i class="glyphicon glyphicon-film"></i> Search Device
+        </h4>
+      </div>
+      <div class="modal-body">
+
+        <div class="panel panel-default">
+          <div class="panel-heading">Filter information</div>
+          <div class="panel-body">
+
+            <div class="col-xs-12 col-lg-9 mb10">
+              <div class="input-group">
+                <span class="input-group-addon">Search</span>
+                <input type="text" class="form-control" data-ng-model="filter.search" data-ng-enter="getDevice();" data-ng-keypress="getDevice();" maxlength="17" placeHolder="By mac id" />
+              </div>
+            </div>
+            <div class="col-xs-12 col-lg-3 mb10">
+              <button type="button" class="btn btn-primary" data-ng-click="search();">Go</button>
+            </div>
+          </div>
+        </div>
+        <div class="panel panel-default hM500">
+          <div class="panel-body">
+            <table class="table table-striped table-hover">
+              <thead>
+                <tr>
+                  <th>&nbsp;</th>
+                  <th>Mac</th>
+                  <th>Model Number</th>
+                  <th>Registration</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr data-ng-hide="modal.loader == null" class="text-center">
+                  <td colspan="100%">
+                    <img src="images/loading.gif" />
+                  </td>
+                </tr>
+                <tr data-ng-if="devices === undefined" class="text-center">
+                  <td colspan="100%">
+                    <p>
+                      It does not have any device with <b>{{filter.search}}</b>.
+                    </p>
+                  </td>
+                </tr>
+                <tr data-ng-if="devices | isNullEmpty" class="text-center">
+                  <td colspan="100%">
+                    <p>It does not have any device available.</p>
+                  </td>
+                </tr>
+                <tr data-ng-repeat="data in devices">
+                  <td>
+                    <button type="button" class="btn btn-small btn-primary" data-ng-click="add(data);">Choose</button>
+                  </td>
+                  <td>{{data.ethMac}}</td>
+                  <td>{{data.model_number}}</td>
+                  <td>{{data.registration | date:'MMM dd, yyyy'}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="pull-left" data-ng-hide="modal.loader == null"><img src="images/loading.gif" /></div>
+        <button type="button" class="btn btn-default" data-ng-hide="modal.loader != null" data-dismiss="modal" data-toggle="modal" data-target="#deviceModal">Back</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

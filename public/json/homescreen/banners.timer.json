@@ -1,0 +1,6 @@
+﻿[
+  {"title": "3 seconds", "code":  3000},
+  {"title": "5 seconds", "code":  5000},
+  {"title": "10 seconds", "code": 10000},
+  {"title": "15 seconds", "code":  15000}
+]

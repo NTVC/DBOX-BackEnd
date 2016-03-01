@@ -1,0 +1,122 @@
+<html ng-app="dbox">
+<head>
+	<% include ./common/meta %>
+
+    <title><%= title %></title>   
+	<% include ./common/css %> 
+
+	<% include ./common/javascript %>
+	<script src="./javascripts/views/tvseries.js?v=<%-GLOBAL.environment_settings.version%>"></script>
+	<script src="./javascripts/views/tvseries.list.js?v=<%-GLOBAL.environment_settings.version%>"></script>
+	<script src="./javascripts/views/tvseries.management.js?v=<%-GLOBAL.environment_settings.version%>"></script>
+	<script src="./javascripts/views/tvseries.video.js?v=<%-GLOBAL.environment_settings.version%>"></script>
+</head>
+<body>
+    <% include ./common/sidebar %>
+
+    <div class="container" id="container" data-ng-controller="tvseriesListController">
+        <div class="row-fluid">
+            <div class="col-xs-12 pside0">
+                <div class="title text-muted">
+                    <div class="pull-left">
+						<h2><i class="<%= icon %>"></i> <%= title %></h2><i>* only series, tv shows or list of videos</i></div>
+					<div class="pull-right"><button type="button" class="btn btn-primary mt15" data-ng-click="new();">New <%= title %></button></div>
+					<div class="clearfix"></div>
+                </div>
+             
+				<hr/>
+            </div>
+			<div class="clearfix"></div>
+
+			<div class="clearfix">
+			
+				<div class="panel panel-default">
+					<div class="panel-heading">Filter information</div>
+					<div class="panel-body">
+						
+						<div class="col-xs-12 col-md-3 mb10">
+							<div class="input-group">
+								<span class="input-group-addon">Search</span>
+								<input type="text" class="form-control" data-ng-model="filter.search" maxlength="30" placeHolder="title or tags" data-ng-enter="search()" />
+							</div>
+						</div>
+						<div class="col-xs-4 col-md-3 mb10">
+							<div class="input-group">
+								<span class="input-group-addon">Category</span>
+								<select class="form-control" data-ng-model="filter.category" data-ng-change="search()">
+									<option value="">All</option>
+									<option value="{{n.id}}" data-ng-repeat="n in categories">{{n.title}}</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-xs-4 col-md-2 mb10">
+							<div class="input-group">
+								<span class="input-group-addon">Status</span>
+								<select class="form-control" data-ng-model="filter.status" data-ng-change="rSearch()">
+									<option value="">All</option>
+									<option value="1">Active</option>
+									<option value="0">Inactive</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-xs-4 col-md-2 mb10">
+							<div class="input-group">
+								<span class="input-group-addon">Show</span>
+								<select class="form-control" data-ng-model="filter.pg.limit" data-ng-change="rSearch()">
+									<option data-ng-repeat="l in limits">{{l.qty}}</option>
+								</select>
+							</div>
+						</div>
+						
+						<div class="col-xs-12 col-md-2 mb10">
+							<button type="button" class="btn btn-primary" data-ng-click="search();">Go</button>
+						</div>
+					</div>
+
+				</div>
+				
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<p class="text-right">Total <b class="pgCounter">{{filter.pg.total}}</b> items</p>
+						<table class="table table-striped table-hover">
+							<thead>
+								<tr>
+									<th>&nbsp;</th>
+									<th>Title</th>
+									<th>Category</th>
+									<th>Language</th>
+									<th>Qty Videos</th>
+									<th>Status</th>
+									<th>&nbsp;</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr data-ng-if="tvseries.length == 0"><td colspan="100%" class="text-center">It does not have any content</td></tr>
+                                <tr data-ng-show="tvseries == null"><td colspan="100%" class="text-center"><img src="images/loading.gif" /></td></tr>
+								<tr data-ng-repeat="data in tvseries">
+									<td width="45"><div class="sThumb zoom" style="background-image:url('{{data.thumb}}')"></div></td>
+									<td>{{data.title}}</td>
+									<td><div data-ng-repeat="n in data.category" data-ng-bind-html="n | category | hashtags | unsafe" class="pull-left"></div></td>
+									<td><div data-ng-repeat="n in data.language" data-ng-bind-html="n | language | hashtags | unsafe" class="pull-left"></div></td>
+									<td>{{data.video_counter}}</td>
+                                    <td><div data-ng-bind-html="data.status | status | unsafe"></div></td>
+									<td class="text-right" width="85">
+										<a href="javascript:;" data-ng-click="addInfo(data);"  data-toggle="popover" popover data-trigger="hover" data-title="Management" data-content="Add or edit season(s) and episode(s)"><span class="<%= icon %>"></span></a>
+										<a href="javascript:;" data-ng-click="edit(data);"><span class="glyphicon glyphicon-pencil"></span></a>
+										<a href="javascript:;" data-ng-click="delete(data);"><span class="glyphicon glyphicon-trash"></span></a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<% include ./common/pagination %>
+					</div>
+				</div>
+
+			</div>
+        </div>
+    </div>
+	
+    <% include ./modal/tvseries %>
+    <% include ./modal/basic %>
+</body>
+</html>

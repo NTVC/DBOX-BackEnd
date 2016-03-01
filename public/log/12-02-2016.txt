@@ -1,0 +1,32 @@
+Date: 2016-02-12T20:06:51.263Z
+ uncaughtException: connect ECONNREFUSED 127.0.0.1:80
+Error: connect ECONNREFUSED 127.0.0.1:80
+    at Object.exports._errnoException (util.js:874:11)
+    at exports._exceptionWithHostPort (util.js:897:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1063:14)
+
+Date: 2016-02-12T20:06:52.798Z
+ uncaughtException: socket hang up
+Error: socket hang up
+    at createHangUpError (_http_client.js:203:15)
+    at Socket.socketCloseListener (_http_client.js:235:23)
+    at emitOne (events.js:82:20)
+    at Socket.emit (events.js:169:7)
+    at TCP._onclose (net.js:469:12)
+
+Date: 2016-02-12T20:26:05.100Z
+ uncaughtException: connect ECONNREFUSED 127.0.0.1:80
+Error: connect ECONNREFUSED 127.0.0.1:80
+    at Object.exports._errnoException (util.js:874:11)
+    at exports._exceptionWithHostPort (util.js:897:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1063:14)
+
+Date: 2016-02-12T20:26:06.303Z
+ uncaughtException: socket hang up
+Error: socket hang up
+    at createHangUpError (_http_client.js:203:15)
+    at Socket.socketCloseListener (_http_client.js:235:23)
+    at emitOne (events.js:82:20)
+    at Socket.emit (events.js:169:7)
+    at TCP._onclose (net.js:469:12)
+

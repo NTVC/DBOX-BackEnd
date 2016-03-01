@@ -1,0 +1,109 @@
+<nav class="navbar navbar-inverse" id="menu">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-9" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      
+      <a class="navbar-brand" href="/">
+        <img src="images/logo_ntvc.png" class="wMax" width="30"/>
+      </a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-9">
+      <ul class="nav navbar-nav">
+          <%if(user.superadmin || user.homeapps|| user.homebanners || user.highlights || user.homesponsors || user.homewidgets || user.homesupport || user.homemenu || user.homebackground) { %>
+          <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Home Screen<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                  <%if(user.superadmin || user.homeapps) { %>
+                  <li><a href="/homeApps">Apps</a></li>       
+                  <% } %>
+                  <%if(user.superadmin || user.homebanners) { %>
+                  <li><a href="/homeBanners">Banners</a></li>
+                  <% } %>
+                  <%if(user.superadmin || user.highlights) { %>
+                  <li><a href="/homeHighLights">Highlights</a></li>
+                  <% } %>
+                  <%if(user.superadmin || user.homesponsors) { %>
+                  <li><a href="/homeSponsors">Sponsors Video</a></li>
+                  <% } %>
+                  <%if(user.superadmin || user.homewidgets) { %>
+                  <li><a href="/homeWidgets">Widgets</a></li>
+                  <% } %>
+                  <%if(user.superadmin || user.homesupport) { %>
+                  <li><a href="/homeSupport">Support</a></li>
+                  <% } %>
+                  <%if(user.superadmin || user.homemenu) { %>
+                  <li><a href="/homeMenu">Menu</a></li>
+                  <% } %>
+                  <%if(user.superadmin || user.homebackground) { %>
+                  <li><a href="/homeBackground">Background</a></li>
+                  <% } %>
+              </ul>
+          </li>          
+          <% } %>          
+          <%if(user.superadmin || user.admin) { %>
+          <li class="<%if(active === "admin") { %>active<% }%>">
+              <a href="/admin">User</a>
+          </li>          
+          <% } %>
+          <%if(user.superadmin || user.live) { %>
+              <li class="<%if(active === "live") { %>active<% }%>">
+                <a href="/live">Live</a>
+              </li>
+          <% } %>
+          <%if(user.superadmin || user.movie) { %>
+              <li class="<%if(active === "movie") { %>active<% }%>">
+                <a href="/movie">Movie</a>
+              </li>
+          <% } %>
+          <%if(user.superadmin || user.tvseries) { %>
+              <li class="<%if(active === "tvseries") { %>active<% }%>">
+                <a href="/tvseries">TV Series</a>
+              </li>
+          <% } %>
+          <%if(user.superadmin || user.community) { %>
+              <li class="<%if(active === "community") { %>active<% }%>">
+                <a href="/community">Community</a>
+              </li>
+          <% } %>
+          <%if(user.superadmin || user.youtuber) { %>
+              <li class="<%if(active === "youtuber") { %>active<% }%>">
+                <a href="/youtuber">Youtuber</a>
+              </li>
+          <% } %>
+          <%if(user.superadmin || user.customer) { %>
+              <li class="<%if(active === "customer") { %>active<% } %>">
+                <a href="/customer">Customer</a>
+              </li>
+          <% } %>
+          <%if(user.superadmin || user.device) { %>
+              <li class="<%if(active === "device") { %>active<% }%>">
+                <a href="/device">Device</a>
+              </li>
+          <% } %>
+            
+      </ul>
+      <ul class="pull-right nav navbar-nav">
+        <li>
+          <a href="/logout">
+            <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <!-- /.navbar-collapse -->
+  </div>
+  <!-- /.container-fluid -->
+</nav>
+<div class="clearfix"></div>
+
+<div id="environment">
+  <span class="badge"><%-GLOBAL.environment%> - v<%-GLOBAL.environment_settings.version%></span>
+</div>

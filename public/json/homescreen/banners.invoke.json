@@ -1,0 +1,7 @@
+﻿[
+  {"value": "", "title": "None"},
+  {"value": "url", "title": "Url"},
+  {"value": "parameter", "title": "Internal Parameter"},
+  {"value": "video", "title": "Video"},
+  {"value": "app", "title": "App"}
+]

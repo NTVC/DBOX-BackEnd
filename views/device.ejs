@@ -1,0 +1,119 @@
+<html ng-app="dbox">
+<head>
+	<% include ./common/meta %>
+
+    <title><%= title %></title>   
+	<% include ./common/css %> 
+	<link href="./stylesheets/datepicker.css" rel="stylesheet" type="text/css" />
+
+	<% include ./common/javascript %>
+	<script src="./javascripts/datepicker.js?v=<%-GLOBAL.environment_settings.version%>"></script>
+	<script src="./javascripts/views/device.js?v=<%-GLOBAL.environment_settings.version%>"></script>
+</head>
+<body>
+    <% include ./common/sidebar %>
+
+    <div class="container" id="container" data-ng-controller="deviceListController">
+        <div class="row-fluid">
+            <div class="col-xs-12 pside0">
+                <div class="title text-muted">
+                    <div class="pull-left"><h2><i class="<%= icon %>"></i> <%= title %></h2></div>
+					<div class="pull-right">
+						<button type="button" class="btn btn-default mt15" data-ng-click="deviceVersions();"><%= title %> Versions</button>
+						<button type="button" class="btn btn-primary mt15" data-ng-click="new();">New <%= title %></button>
+					</div>
+					<div class="clearfix"></div>
+                </div>
+             
+				<hr/>
+            </div>
+			<div class="clearfix"></div>
+
+			<div class="clearfix">
+			
+				<div class="panel panel-default">
+					<div class="panel-heading">Filter information</div>
+					<div class="panel-body">
+						
+						<div class="col-xs-12 col-lg-3 mb10">
+							<div class="input-group">
+								<span class="input-group-addon">Search</span>
+								<input type="text" class="form-control" data-ng-model="filter.search" maxlength="30" data-ng-enter="search()" placeholder="mac and model number" />
+							</div>
+						</div>
+						<div class="col-xs-12 col-lg-2 mb10">
+							<div class="input-group">
+								<span class="input-group-addon">Status</span>
+								<select class="form-control" data-ng-model="filter.status" data-ng-change="rSearch()">
+									<option value="">All</option>
+									<option value="1">Active</option>
+									<option value="0">Inactive</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-xs-12 col-lg-2 mb10">
+							<div class="input-group">
+								<span class="input-group-addon">Show</span>
+								<select class="form-control" data-ng-model="filter.pg.limit" data-ng-change="search()">
+									<option data-ng-repeat="l in limits">{{l.qty}}</option>
+								</select>
+							</div>
+						</div>
+						
+						<div class="col-xs-12 col-lg-3 mb10">
+							<button type="button" class="btn btn-primary" data-ng-enter="search();">Go</button>
+						</div>
+
+					</div>
+
+				</div>
+
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<p class="text-right">Total <b class="pgCounter">{{filter.pg.total}}</b> items</p>
+						<table class="table table-striped table-hover">
+							<thead>
+								<tr>
+									<th>Uid</th>
+									<th>Mac</th>
+									<th>wMac</th>
+									<th>Customer</th>
+									<th>Model Number</th>
+									<th>Registration</th>
+									<th>Status</th>
+									<th>&nbsp;</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr data-ng-if="devices.length == 0"><td colspan="100%" class="text-center">It does not have any content</td></tr>
+                                <tr data-ng-show="devices == null"><td colspan="100%" class="text-center"><img src="images/loading.gif" /></td></tr>
+								<tr data-ng-repeat="data in devices">
+									<td>{{data.uid}}</td>
+									<td>{{data.ethMac}}</td>
+									<td>{{data.wMac}}</td>
+									<td>
+										<span data-ng-if="(data.customer | isNullEmpty)" class="text-danger">Not associate</span>
+										<a data-ng-if="data.customer" href="/customer?c={{data.customer.id}}">{{data.customer.name}}</a>
+									</td>
+									<td>{{data.model_number}}</td>
+									<td>{{data.registration | date:'MMM dd, yyyy'}}</td>
+                                    <td><div data-ng-bind-html="data.status | status | unsafe"></div></td>
+									<td class="text-right" width="70">
+										<a href="javascript:;" data-ng-click="edit(data);"><span class="glyphicon glyphicon-pencil"></span></a>
+										<a href="javascript:;" data-ng-click="delete(data);"><span class="glyphicon glyphicon-trash"></span></a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+
+						<% include ./common/pagination %>
+					</div>
+				</div>
+			</div>
+        </div>
+    </div>
+	
+    <% include ./modal/device %>
+    <% include ./modal/basic %>
+</body>
+</html>

@@ -1,0 +1,18 @@
+<div class="clearfix"></div>
+<div class="col-sm-12 pl0 pr0" data-ng-if="filter.pg.qtdPage > 1">
+  <div class="col-sm-9 pl0 ml0">
+
+    <div class="input-group pb15 w150 pull-left">
+      <span class="input-group-addon">Browse by page</span>
+      <select class="form-control w150 pull-left" data-ng-model="filter.pg.index" data-ng-change="search()">
+        <option data-ng-repeat="n in filter.pg.range" value="{{n-1}}">Page {{n}}</option>
+      </select>
+      <span class="input-group-addon">Page&nbsp;{{ filter.pg.index | sum : 1}} of {{filter.pg.qtdPage }} </span>
+
+    </div>
+    
+  </div>
+  <div class="col-sm-3 text-right f11 pr0">
+    Total <b class="pgCounter">{{filter.pg.total}}</b> items
+  </div>
+</div>

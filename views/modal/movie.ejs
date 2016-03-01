@@ -1,0 +1,266 @@
+<div id="movieModal" class="modal fade" data-backdrop="static" data-ng-controller="movieModalController">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">
+                  <i class="<%= icon %>"></i> <%= title %>
+                </h4>
+            </div>
+            <div class="modal-body">
+            
+            <form id="fMovie" method="POST" enctype="multipart/form-data" data-ng-show="!movie.loader">
+                
+                <div class="pt15 alert alert-warning" data-ng-hide="movie.error == null" role="alert">
+                    <div data-ng-bind-html="movie.error | unsafe"></div>
+                </div>
+
+                <div class="col-lg-4 text-center">
+                    <div class="pic" style="background:url('{{movie.thumb | getImage}}');"></div>
+                    <div class="clearfix"></div>
+                    <a href="javascript:;" onclick="getFileThumb('#movieThumb')">edit thumb</a>
+                    <input id="movieThumb" name="thumb_file" type="file" class="hidden" accept="image/*" data-key="movieModal.movie.thumb" />
+                </div>
+
+                <div class="col-lg-4 text-center">
+                    <div class="pic" style="background:url('{{movie.cover | getImage}}');"></div>
+                    <div class="clearfix"></div>
+                    <a href="javascript:;" onclick="getFileThumb('#movieCover')">edit cover</a>
+                    <input id="movieCover" name="cover_file" type="file" class="hidden" accept="image/*" data-key="movieModal.movie.cover" />
+                </div>
+
+                <div class="clearfix"></div>
+                
+                <div class="form-group">
+                    <label>Title</label>
+                    <input type="text" name="title" class="form-control" placeholder="Title" data-ng-model="movie.title" maxlength="200" />
+                </div>
+                <div class="form-group ng-scope" data-ng-if="!movie.url">
+                    <label>File</label>
+                    <input id="movie_file" name="file" type="file" class="form-control" data-ng-model="movie.file" accept="video/*">
+                </div>
+                <div class="form-group" data-ng-if="movie.url && movie.isPublished">
+                    <label>Url</label>
+                    <span>{{movie.url}}</span>
+                </div>
+                <input name="url" type="hidden" data-ng-model="movie.url" />
+                
+                <div class="clearfix"></div>
+                
+                <div class="col-xs-6 pside0">
+                    <label>Status</label>
+                    <select name="active" data-ng-model="movie.active" class="form-control" data-bool-value="">
+                        <option value="true" selected="">Active</option>
+                        <option value="false">Inactive</option>
+                    </select>
+                </div>
+                <div class="col-xs-6">
+                    <label>Published</label>
+                    <div data-ng-bind-html="movie.isPublished | isPublished | unsafe"></div>
+                    <input name="isPublished" type="hidden" data-ng-model="movie.isPublished" value="" />
+                </div>
+                
+                <div class="clearfix"></div>
+                
+                <div class="form-group pt15">
+                    <label>Category</label>
+                    <div class="clearfix"></div>
+                    <div ng-repeat="data in categories" class="col-xs-12 col-md-4 col-lg-4 pside0">
+                        <label class="text-ub">
+                        <input
+                            type="checkbox"
+                            name="category"
+                            value="{{data.id}}"
+                            ng-checked="movie.category.indexOf(data.id) > -1"
+                            ng-click="toggleSelection(data.id, true)" class="" />
+                        {{data.title}}
+                        </label>
+                    </div>
+                
+                    <div class="clearfix"></div>
+                </div>
+
+                <div class="clearfix"></div>
+                
+                <div class="form-group">
+                    <label>Language</label>
+                    <div class="clearfix"></div>
+                    <div ng-repeat="data in languages" class="col-xs-12 col-md-4 col-lg-4 pside0">
+                        <label class="text-ub">
+                        <input
+                        type="checkbox"
+                        name="language"
+                        value="{{data.code}}"
+                        ng-checked="movie.language.indexOf(data.code) > -1"
+                        ng-click="toggleSelection(data.code, false)" />
+                        {{data.name}}
+                        </label>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                
+                <div class="clearfix"></div>
+            
+                <div class="form-group">
+                    <label>Tags</label>
+                    <textarea name="tags" class="form-control" data-ng-model="movie.tags" rows="3"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea name="description" class="form-control" data-ng-model="movie.description" rows="5"></textarea>
+                </div>
+                        
+                <div class="form-group">
+                    <a href="javascript:;" data-ng-click="showMore = !showMore">Show {{showMore ? 'Less' : 'More'}}</a>
+                </div>
+                
+                <div data-ng-show="showMore">
+                        <div class="col-lg-4 col-xs-12 pside0" data-ng-hide="movie.lenght | isNullEmpty">
+                            <label>Length</label>
+                            <span class="clearfix">{{movie.lenght}}</span>
+                            <input type="hidden" name="lenght" data-ng-model="movie.lenght" value="" />
+                        </div>
+                        
+                        <div class="col-lg-4 col-xs-12 pside0" data-ng-hide="movie.exibitiondate | isNullEmpty">
+                            <label>Exibition Date</label>
+                            <span class="clearfix">{{movie.exibitiondate | date:'MMM dd, yyyy'}}</span>
+                            <input type="hidden" name="exibitiondate" data-ng-model="movie.exibitiondate" value="" />
+                        </div>
+                        
+                        <div class="col-lg-4 col-xs-12 pside0" data-ng-hide="movie.country | isNullEmpty">
+                            <label>Country</label>
+                            <span class="clearfix">{{movie.country}}</span>
+                            <input type="hidden" name="country" data-ng-model="movie.country" value="" />
+                        </div>
+            
+                        <div class="clearfix">&nbsp;</div>
+            
+                        <div class="col-lg-4 col-xs-12 pside0" data-ng-hide="movie.year | isNullEmpty">
+                            <label>Year</label>
+                            <span class="clearfix">{{movie.year}}</span>
+                            <input type="hidden" name="year" data-ng-model="movie.year" value="" />
+                        </div>
+                        
+                        <div class="col-lg-4 col-xs-12 pside0" data-ng-hide="movie.rated | isNullEmpty">
+                            <label>Rated</label>
+                            <span class="clearfix">{{movie.rated}}</span>
+                            <input type="hidden" name="rated" data-ng-model="movie.rated" value="" />
+                        </div>
+            
+                        <div class="col-lg-4 col-xs-12 pside0" data-ng-hide="movie.awards | isNullEmpty">
+                            <label>Awards</label>
+                            <span class="clearfix">{{movie.awards}}</span>
+                            <input type="hidden" name="awards" data-ng-model="movie.awards" value="" />
+                        </div>
+            
+                        <div class="clearfix">&nbsp;</div>
+            
+                        <div class="form-group" data-ng-hide="movie.director | isNullEmpty">
+                            <label>Director</label>
+                            <span class="clearfix">{{movie.director}}</span>
+                            <input type="hidden" name="director" data-ng-model="movie.director" value="" />
+                        </div>
+            
+                        <div class="form-group" data-ng-hide="movie.actors | isNullEmpty">
+                            <label>Actors</label>
+                            <span class="clearfix">{{movie.actors}}</span>
+                            <input type="hidden" name="actors" data-ng-model="movie.actors" value="" />
+                        </div>
+                        
+                        <div class="form-group" data-ng-hide="movie.writer | isNullEmpty">
+                            <label>Writer</label>
+                            <span class="clearfix">{{movie.writer}}</span>
+                            <input type="hidden" name="writer" data-ng-model="movie.writer" value="" />
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    
+                    <input type="hidden" data-ng-model="movie.save" name="save" value="">
+                </form>
+                
+                <div class="progress" data-ng-hide="movie.loader == null">
+                    <div class="progress-bar progress-bar-info progress-bar-striped upPercent active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+                        <span id="upPercent">0</span>%
+                    </div>
+                </div>
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-default" data-ng-if="movie.search" data-dismiss="modal" data-toggle="modal" data-target="#searchMovieModal">Back</button>
+                <button type="button" class="btn btn-primary" data-ng-disabled="movie.loader != null || ( (!movie.isPublished) && movie._id)" data-ng-click="save();">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="searchMovieModal" class="modal fade" data-backdrop="static" data-ng-controller="searchMovieModalController">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">
+                  <i class="glyphicon glyphicon-film"></i> Search Movie
+                </h4>
+            </div>
+            <div class="modal-body">
+              
+                <div class="panel panel-default">
+                    <div class="panel-heading">Filter information</div>
+                    <div class="panel-body">
+            
+                        <div class="col-xs-12 col-lg-9 mb10">
+                                <div class="input-group">
+                                    <span class="input-group-addon">Search</span>
+                                    <input type="text" class="form-control" data-ng-model="filter.search" maxlength="30" data-ng-enter="search()" />
+                                </div>
+                        </div>
+                        <div class="col-xs-12 col-lg-3 mb10">
+                                <button type="button" class="btn btn-primary" data-ng-click="search();">Go</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default hM500">
+                    <div class="panel-body">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>&nbsp;</th>
+                                    <th>&nbsp;</th>
+                                    <th>Title</th>
+                                    <th>Year</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr data-ng-hide="movie.loader == null" class="text-center">
+                                <td colspan="100%"><img src="images/loading.gif" /></td>
+                                </tr>
+                                <tr data-ng-if="lstMovies === undefined" class="text-center">
+                                    <td colspan="100%">
+                                    <p>It does not have any movie with <b>{{filter.search}}</b>.</p>
+                                    </td>
+                                </tr>
+                                <tr data-ng-repeat="data in lstMovies" data-ng-if="lstMovies != []">
+                                    <td><button type="button" class="btn btn-small btn-primary" data-ng-click="add(data);">Choose</button></td>
+                                    <td width="45">
+                                        <div class="sThumb zoom" style="background-image:url('{{data.Poster}}')"></div>
+                                        <!--<img data-ng-src="{{data.Poster}}?ticks={{data.Poster}}" />
+                                        <iframe class="iframe" src="{{ ('imdb-hack?url=' + data.Poster) | trustUrl}}" scrolling="no"></iframe>-->
+                                    </td>
+                                    <td>{{data.Title}}</td>
+                                    <td>{{data.Year}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-ng-click="new();" data-dismiss="modal">New Template</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,8 @@
+﻿[
+{"name": "Home","nexturl": "gethomescreenmenu", "submenu": false},
+{"name": "Community channels","nexturl": "getcommunitycountries", "submenu": true},
+{"name": "Live tv","nexturl": "getlivecountries", "submenu":  true},
+{"name": "Movies","nexturl": "getmoviecategories", "submenu": true},
+{"name": "Tv Series","nexturl": "gettvseriescategories","submenu": true}
+]
+

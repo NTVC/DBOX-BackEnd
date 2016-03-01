@@ -1,0 +1,26 @@
+Date: 2016-02-23T20:22:19.280Z
+ uncaughtException: Can't set headers after they are sent.
+Error: Can't set headers after they are sent.
+    at ServerResponse.OutgoingMessage.setHeader (_http_outgoing.js:335:11)
+    at ServerResponse.res.setHeader (/Users/developer/Documents/DBOX/GOLIVE/back/node_modules/express/node_modules/connect/lib/patch.js:63:22)
+    at ServerResponse.setWriteHeadHeaders (/Users/developer/Documents/DBOX/GOLIVE/back/node_modules/express-session/node_modules/on-headers/index.js:82:19)
+    at ServerResponse.writeHead (/Users/developer/Documents/DBOX/GOLIVE/back/node_modules/express-session/node_modules/on-headers/index.js:41:36)
+    at /Users/developer/Documents/DBOX/GOLIVE/back/controllers/MovieController.js:381:32
+    at /Users/developer/Documents/DBOX/GOLIVE/back/node_modules/mongoose/lib/document.js:1688:19
+    at module.exports.hook.proto.(anonymous function).handleError (/Users/developer/Documents/DBOX/GOLIVE/back/node_modules/mongoose/node_modules/hooks-fixed/hooks.js:40:22)
+    at module.exports.hook.proto.(anonymous function)._next (/Users/developer/Documents/DBOX/GOLIVE/back/node_modules/mongoose/node_modules/hooks-fixed/hooks.js:46:22)
+    at fnWrapper (/Users/developer/Documents/DBOX/GOLIVE/back/node_modules/mongoose/node_modules/hooks-fixed/hooks.js:186:18)
+    at /Users/developer/Documents/DBOX/GOLIVE/back/node_modules/mongoose/lib/schema.js:198:13
+    at Document.$__validate.complete (/Users/developer/Documents/DBOX/GOLIVE/back/node_modules/mongoose/lib/document.js:1108:7)
+    at /Users/developer/Documents/DBOX/GOLIVE/back/node_modules/mongoose/lib/document.js:1137:20
+    at SchemaString.SchemaType.doValidate (/Users/developer/Documents/DBOX/GOLIVE/back/node_modules/mongoose/lib/schematype.js:645:22)
+    at /Users/developer/Documents/DBOX/GOLIVE/back/node_modules/mongoose/lib/document.js:1133:9
+    at doNTCallback0 (node.js:419:9)
+    at process._tickCallback (node.js:348:13)
+
+Date: 2016-02-23T20:22:44.828Z
+ uncaughtException: ValidationError: CastError: Cast to Array failed for value "data.id,data.id,data.id" at path "category"
+Date: 2016-02-23T20:24:24.843Z
+ uncaughtException: ValidationError: CastError: Cast to Array failed for value "data.id,data.id,data.id,data.id" at path "category"
+Date: 2016-02-23T20:38:09.288Z
+ uncaughtException: ValidationError: CastError: Cast to Array failed for value "data.id,data.id" at path "category"

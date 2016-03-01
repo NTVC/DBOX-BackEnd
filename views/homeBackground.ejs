@@ -1,0 +1,116 @@
+<html ng-app="dbox">
+<head>
+	<% include ./common/meta %>
+
+    <title><%= title %></title>   
+	<% include ./common/css %> 
+
+	<% include ./common/javascript %>
+	<script src="./javascripts/views/homeBackground.js?v=<%-GLOBAL.environment_settings.version%>"></script>
+</head>
+<body>
+    <% include ./common/sidebar %>
+
+    <div class="container" id="container" data-ng-controller="backgroundListController">
+        <div class="row-fluid">
+            <div class="col-xs-12 pside0">
+                <div class="title text-muted">
+                    <div class="pull-left"><h2><i class="<%= icon %>"></i> <%= title %></h2></div>
+					<div class="pull-right"><button type="button" class="btn btn-primary mt15" data-ng-click="new();">New <%= title %></button></div>
+					<div class="clearfix"></div>
+                </div>
+             
+				<hr/>
+            </div>
+			<div class="clearfix"></div>
+
+			<div class="clearfix">
+			
+				<div class="panel panel-default">
+					<div class="panel-heading">Filter information</div>
+					<div class="panel-body">
+						
+						<div class="col-xs-12 col-lg-3 mb10">
+							<div class="input-group">
+								<span class="input-group-addon">Country</span>
+								<select class="form-control" data-ng-model="filter.country" data-ng-change="search()">
+									<option value="">All</option>
+									<option data-ng-repeat="data in countries" value="{{data.code}}">{{data.name}}</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-xs-12 col-lg-2 mb10">
+							<div class="input-group">
+								<span class="input-group-addon">Status</span>
+								<select class="form-control" data-ng-model="filter.status" data-ng-change="rSearch()">
+									<option value="1">Active</option>
+									<option value="0">Inactive</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-xs-12 col-lg-2 mb10">
+							<div class="input-group">
+								<span class="input-group-addon">Show</span>
+								<select class="form-control" data-ng-model="filter.pg.limit" data-ng-change="rSearch()">
+									<option data-ng-repeat="l in limits">{{l.qty}}</option>
+								</select>
+							</div>
+						</div>
+						
+						<div class="col-xs-12 col-lg-2 mb10">
+							<button type="button" class="btn btn-primary" data-ng-click="search();">Go</button>
+						</div>
+
+					</div>
+				</div>
+
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<p class="text-right">Total <b class="pgCounter">{{filter.pg.total}}</b> items</p>
+						<table class="table table-striped table-hover">
+							<thead>
+								<tr>
+									<th>Home</th>
+									<th>Live TV</th>
+									<th>Community</th>
+									<th>Tv Series</th>
+									<th>Youtuber</th>
+									<th>Country</th>
+									<th>Status</th>
+									<th>Registration</th>
+									<th>&nbsp;</th>
+								</tr>
+							</thead>
+							<tbody>
+                                <tr data-ng-show="backgrounds == null"><td colspan="100%" class="text-center"><img src="images/loading.gif" /></td></tr>
+								<tr data-ng-show="backgrounds.length == 0"><td colspan="100%" class="text-center">It does not have any content</td></tr>
+								<tr data-ng-repeat="data in backgrounds">
+									<td width="45"><div class="sThumb zoom" style="background-image:url('{{data.home}}')"></div></td>
+									<td width="45"><div class="sThumb zoom" style="background-image:url('{{data.live}}')"></div></td>
+									<td width="45"><div class="sThumb zoom" style="background-image:url('{{data.community}}')"></div></td>
+									<td width="45"><div class="sThumb zoom" style="background-image:url('{{data.tvseries}}')"></div></td>
+									<td width="45"><div class="sThumb zoom" style="background-image:url('{{data.youtuber}}')"></div></td>
+									<td><span class="bfh-countries" data-flags="true" data-country="{{data.country}}"></span></td>
+                                    <td><div data-ng-bind-html="data.status | status | unsafe"></div></td>
+									<td>{{data.registration | date:'MMM dd, yyyy'}}</td>
+									<td class="text-right" width="70">
+										<a href="javascript:;" data-ng-click="edit(data);"><span class="glyphicon glyphicon-pencil"></span></a>
+										<a href="javascript:;" data-ng-click="delete(data);"><span class="glyphicon glyphicon-trash"></span></a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+
+						<% include ./common/pagination %>
+					</div>
+
+				</div>
+			</div>
+		
+        </div>
+    </div>
+
+    <% include ./modal/homeBackground %>
+    <% include ./modal/basic %>
+</body>
+</html>

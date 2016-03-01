@@ -1,0 +1,112 @@
+<div id="addListModal" class="modal fade" data-backdrop="static" data-ng-controller="addListModalController">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">Add Banner</h4>
+      </div>
+      <div class="modal-body">
+        <div class="pt15 alert alert-warning" data-ng-hide="list.error == null" role="alert">
+          <div data-ng-bind-html="list.error | unsafe"></div>
+        </div>
+
+        <div class="form-group">
+          <label>Title</label>
+          <input type="text" class="form-control" placeholder="Title" data-ng-model="list.title" maxlength="200" />
+        </div>
+        <div class="form-group">
+          <label>Description</label>
+          <textarea class="form-control" data-ng-model="list.description" rows="7" maxlength="1000"></textarea>
+        </div>
+
+        <div class="clearfix"></div>
+        
+        <div class="form-group col-xs-4 pside0">
+            <label>Timer</label>
+            <select class="form-control" data-ng-model="list.timer">
+                <option data-ng-repeat="data in timers" value="{{data.code}}">{{data.title}}</option>
+            </select>
+        </div>
+        <div class="form-group col-xs-4">
+            <label>Status</label>
+            <select data-ng-model="list.status" class="form-control w150" data-bool-value="">
+              <option value="true" selected="">Active</option>
+              <option value="false">Inactive</option>
+            </select>
+        </div>
+
+        <div class="clearfix"></div>
+      </div>
+      <div class="modal-footer">
+        <div class="pull-left" data-ng-hide="list.loader == null">
+          <img src="images/loading.gif" />
+        </div>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-ng-disabled="list.loader != null" data-ng-click="save($index);">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="addContentModal" class="modal fade" data-backdrop="static" data-ng-controller="addContentModalController">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">Add Content</h4>
+      </div>
+      <div class="modal-body">
+        <div class="pt15 alert alert-warning" data-ng-hide="content.error == null" role="alert">
+            <div data-ng-bind-html="content.error | unsafe"></div>
+        </div>
+        
+        <div class="clearfix"></div>
+
+        <div class="col-xs-12 col-lg-4 text-center">
+            <div class="pic" style="background:url('{{content.banner | getImage}}');"></div>
+            <div class="clearfix"></div>
+            <a href="javascript:;" onclick="getFileThumb('#contentBanner')">edit banner</a>
+            <input id="contentBanner" type="file" class="hidden" accept="image/*" data-key="addContentModal.content.banner" />
+        </div>
+
+        <div class="col-xs-12 col-lg-8">
+
+            <div class="form-group">
+                <label>Invoke</label>
+                <select class="form-control" data-ng-model="content.invoke">
+                    <option value="{{i.value}}" data-ng-repeat="i in invokes">{{i.title}}</option>
+                </select>
+            </div>
+            <div class="form-group" data-ng-if="content.invoke">
+                <label>Paremeter</label>
+                <input type="text" class="form-control" data-ng-model="content.parameter" maxlength="5000" />
+            </div>
+            <div class="form-group pull-left mr15">
+                <label>Status</label>
+                <select data-ng-model="content.status" class="form-control w150" data-bool-value="">
+                    <option value="true" selected>Active</option>
+                    <option value="false">Inactive</option>
+                </select>
+            </div>
+            <div class="form-group" data-ng-if="content.registration">
+                <label>Registration</label>
+                <span class="clearfix">{{content.registration | date:'MMM dd, yyyy'}}</span>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+
+        <div class="clearfix"></div>
+      </div>
+      <div class="modal-footer">
+          <div class="pull-left" data-ng-hide="content.loader == null"><img src="images/loading.gif" /></div>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" data-ng-disabled="content.loader != null" data-ng-click="save();">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+

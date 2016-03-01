@@ -1,0 +1,7 @@
+body,html{
+height: 100%;
+    background-image: linear-gradient(rgb(104, 145, 162), #2b3f8e);
+    background:url(../images/login_background.jpg) no-repeat;
+    background-size:cover;
+    background-attachment:fixed;
+}

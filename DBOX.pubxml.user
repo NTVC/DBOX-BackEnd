@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit http://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <_PublishTargetUrl>C:\Users\MyAgencyPal\Documents\PROJECTS\DBOX</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="views/admin.ejs">
+      <publishTime>10/29/2015 13:13:02</publishTime>
+    </File>
+    <File Include="views/community.ejs">
+      <publishTime>11/04/2015 13:50:58</publishTime>
+    </File>
+    <File Include="views/customer.ejs">
+      <publishTime>11/09/2015 15:02:51</publishTime>
+    </File>
+    <File Include="views/device.ejs">
+      <publishTime>11/09/2015 14:31:44</publishTime>
+    </File>
+    <File Include="views/homeApps.ejs">
+      <publishTime>11/11/2015 10:46:38</publishTime>
+    </File>
+    <File Include="views/homeHighlights.ejs">
+      <publishTime>11/12/2015 17:31:58</publishTime>
+    </File>
+    <File Include="views/index.ejs">
+      <publishTime>10/09/2015 14:24:57</publishTime>
+    </File>
+    <File Include="views/live.ejs">
+      <publishTime>11/12/2015 12:57:22</publishTime>
+    </File>
+    <File Include="views/login.ejs">
+      <publishTime>11/10/2015 14:01:58</publishTime>
+    </File>
+    <File Include="views/movie.ejs">
+      <publishTime>11/12/2015 13:10:27</publishTime>
+    </File>
+    <File Include="views/tvseries.ejs">
+      <publishTime>10/27/2015 10:42:37</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

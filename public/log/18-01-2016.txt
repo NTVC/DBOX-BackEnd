@@ -1,0 +1,77 @@
+Date: 2016-01-18T21:06:42.374Z
+ uncaughtException: test
+Date: 2016-01-18T21:10:54.776Z
+ uncaughtException: test
+Date: 2016-01-18T21:19:17.028Z
+ uncaughtException: test
+Date: 2016-01-18T21:20:49.089Z
+ uncaughtException: test
+Date: 2016-01-18T21:22:33.457Z
+ uncaughtException: test
+Date: 2016-01-18T21:24:14.901Z
+ uncaughtException: test
+Date: 2016-01-18T21:24:29.644Z
+ uncaughtException: test
+Date: 2016-01-18T21:25:56.917Z
+ uncaughtException: test
+Date: 2016-01-18T21:27:30.009Z
+ uncaughtException: test
+Date: 2016-01-18T21:27:46.117Z
+ uncaughtException: test
+Date: 2016-01-18T21:28:06.411Z
+ uncaughtException: test
+Date: 2016-01-18T21:29:47.399Z
+ uncaughtException: test
+Date: 2016-01-18T21:30:41.561Z
+ uncaughtException: test
+Date: 2016-01-19T00:13:21.606Z
+ uncaughtException: test
+Date: 2016-01-19T00:14:57.817Z
+ uncaughtException: test
+Date: 2016-01-19T00:15:22.209Z
+ uncaughtException: test
+Date: 2016-01-19T00:16:38.832Z
+ uncaughtException: test
+Date: 2016-01-19T00:46:47.762Z
+ uncaughtException: test
+Date: 2016-01-19T00:47:43.705Z
+ uncaughtException: test
+Date: 2016-01-19T00:47:51.285Z
+ uncaughtException: Invalid array length
+RangeError: Invalid array length
+    at Object.C_lib.WordArray.Base.extend.clamp (/Users/developer/Documents/DBOX/GOLIVE/back/node_modules/crypto-js/core.js:254:27)
+    at Object.C_lib.WordArray.Base.extend.concat (/Users/developer/Documents/DBOX/GOLIVE/back/node_modules/crypto-js/core.js:219:19)
+    at Object.CryptoJS.lib.Cipher.C_pad.Pkcs7.pad (/Users/developer/Documents/DBOX/GOLIVE/back/node_modules/crypto-js/cipher-core.js:415:19)
+    at Object.CryptoJS.lib.Cipher.C_lib.BlockCipher.Cipher.extend._doFinalize (/Users/developer/Documents/DBOX/GOLIVE/back/node_modules/crypto-js/cipher-core.js:487:26)
+    at Object.CryptoJS.lib.Cipher.C_lib.Cipher.BufferedBlockAlgorithm.extend.finalize (/Users/developer/Documents/DBOX/GOLIVE/back/node_modules/crypto-js/cipher-core.js:163:44)
+    at Object.CryptoJS.lib.Cipher.C_lib.SerializableCipher.Base.extend.encrypt (/Users/developer/Documents/DBOX/GOLIVE/back/node_modules/crypto-js/cipher-core.js:670:41)
+    at Object.CryptoJS.lib.Cipher.C_lib.PasswordBasedCipher.SerializableCipher.extend.encrypt (/Users/developer/Documents/DBOX/GOLIVE/back/node_modules/crypto-js/cipher-core.js:828:58)
+    at Object.CryptoJS.lib.Cipher.C_lib.Cipher.BufferedBlockAlgorithm.extend._createHelper.cipher.encrypt (/Users/developer/Documents/DBOX/GOLIVE/back/node_modules/crypto-js/cipher-core.js:201:59)
+    at GLOBAL.encrypter (/Users/developer/Documents/DBOX/GOLIVE/back/util/generic.js:27:58)
+    at /Users/developer/Documents/DBOX/GOLIVE/back/controllers/box/ParentalControlController.js:225:43
+    at Query.<anonymous> (/Users/developer/Documents/DBOX/GOLIVE/back/node_modules/mongoose/lib/query.js:2119:28)
+    at /Users/developer/Documents/DBOX/GOLIVE/back/node_modules/mongoose/node_modules/kareem/index.js:177:19
+    at /Users/developer/Documents/DBOX/GOLIVE/back/node_modules/mongoose/node_modules/kareem/index.js:109:16
+    at doNTCallback0 (node.js:419:9)
+    at process._tickCallback (node.js:348:13)
+
+Date: 2016-01-19T00:48:07.243Z
+ uncaughtException: test
+Date: 2016-01-19T00:49:10.585Z
+ uncaughtException: test
+Date: 2016-01-19T00:50:50.100Z
+ uncaughtException: test
+Date: 2016-01-19T00:51:38.822Z
+ uncaughtException: test
+Date: 2016-01-19T00:52:08.006Z
+ uncaughtException: test
+Date: 2016-01-19T00:53:06.508Z
+ uncaughtException: test
+Date: 2016-01-19T00:55:13.110Z
+ uncaughtException: test
+Date: 2016-01-19T00:57:10.482Z
+ uncaughtException: test
+Date: 2016-01-19T00:58:58.828Z
+ uncaughtException: test
+Date: 2016-01-19T01:00:07.163Z
+ uncaughtException: test

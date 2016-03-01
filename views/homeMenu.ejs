@@ -1,0 +1,157 @@
+<html ng-app="dbox">
+<head>
+    <% include ./common/meta %>
+
+    <title><%= title %></title>
+    <% include ./common/css %>
+
+    <% include ./common/javascript %>
+    <script src="./javascripts/views/homeMenu.js?v=<%-GLOBAL.environment_settings.version%>"></script>
+    <script>
+        var limitData = <%-GLOBAL.HOMESCREEN_LIMIT.MENU%>;
+    </script>
+</head>
+<body>
+    <% include ./common/sidebar %>
+
+    <div class="container" id="container" data-ng-controller="menuListController">
+
+        <div class="col-xs-12 pside0">
+            <div class="title text-muted">
+                <div class="pull-left"><h2><i class="<%= icon %>"></i> <%= title %></h2></div>
+                <div class="clearfix"></div>
+            </div>
+
+            <hr />
+        </div>
+        <div class="clearfix"></div>
+        <div class="col-md-7 col-xs-12">
+
+            <div class="panel panel-default">
+                <div class="panel-heading">Filter information</div>
+                <div class="panel-body">
+
+                    <div class="col-xs-12 col-lg-5 mb10">
+                        <div class="input-group">
+                            <span class="input-group-addon">Country</span>
+                            <select class="form-control" data-ng-model="filter.country" data-ng-change="search()">
+                                <option data-ng-repeat="data in countries" data-ng-selected="data.code == filter.country" value="{{data.code}}">{{data.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-lg-4 mb10">
+                        <div class="input-group">
+                            <span class="input-group-addon">Status</span>
+                            <select class="form-control" data-ng-model="filter.status" data-ng-change="search()">
+                                <option value="1">Active</option>
+                                <option value="0">Inactive</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-12 col-lg-2 mb10">
+                        <button type="button" class="btn btn-primary" data-ng-click="search();">Go</button>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <p class="text-right">Total <b class="pgCounter">{{menus.length}}</b> items</p>
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Next url</th>
+                                <th>Has submenu</th>
+                                <th>Status</th>
+                                <th>&nbsp;</th>
+                            </tr>
+                        </thead>
+                        <tbody class="menu-order">
+                            <tr data-ng-show="menus == null"><td colspan="100%" class="text-center"><img src="images/loading.gif" /></td></tr>
+                            <tr data-ng-show="menus.length == 0"><td colspan="100%" class="text-center">It does not have any content</td></tr>
+                            <tr id="{{data._id}}" data-ng-repeat="data in menus">
+                                <td>{{data.title}}</td>
+                                <td>{{data.nexturl}}</td>
+                                <td>{{data.submenu ? "Yes" : "No"}}</td>
+                                <td><div data-ng-bind-html="data.status | status | unsafe"></div></td>
+                                <td class="text-right" width="85">
+                                    <a href="javascript:;" data-ng-click="edit(data);"><span class="glyphicon glyphicon-pencil"></span></a>
+                                    <a href="javascript:;" data-ng-click="delete(data);"><span class="glyphicon glyphicon-trash"></span></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="menuModal" class="col-md-5 hidden-sm hidden-xs" data-ng-controller="menuModalController">
+            
+			<div data-ng-if="!allowInsert">
+				<div class="pt15 alert alert-warning" role="alert">
+					<span>I'm sorry, you can't add more <b>menus</b>. The limit is <%-GLOBAL.HOMESCREEN_LIMIT.MENU%> item(s) by country</span>
+				</div>
+			</div>
+            
+            <div class="panel panel-default">
+                <div class="panel-body">
+
+                    <div class="pt15 alert alert-warning" data-ng-hide="menu.error == null" role="alert">
+                        <div data-ng-bind-html="menu.error | unsafe"></div>
+                    </div>
+
+                    <div class="form-group" data-ng-if="menu._id">
+                        <label>Id</label>
+                        <span>{{menu._id}}</span>
+                    </div>
+                    <div class="form-group">
+                        <label>Title</label>
+                        <input type="text" class="form-control" placeholder="Title" data-ng-model="menu.title" maxlength="45" />
+                    </div>
+                    <div class="form-group col-xs-7 pside0">
+                        <label>Next Url</label>
+                        <select id="nexturl" data-ng-model="menu.nexturl" data-ng-change="setSubmenu()" class="form-control" data-bool-value="">
+                            <option data-ng-repeat="data in urls" data-ng-selected="data.value == menu.nexturl" data-submenu="{{data.submenu}}" value="{{data.value}}">{{data.title}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-xs-5">
+                        <label>Has submenu</label>
+                        <span class="clearfix">{{menu.submenu ? "Yes" : "No"}}</span>
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea class="form-control" data-ng-model="menu.description" rows="5"></textarea>
+                    </div>
+                    <div class="form-group col-xs-6 pside0">
+                        <label>Status</label>
+                        <select data-ng-model="menu.status" class="form-control" data-bool-value="">
+                            <option value="true" selected="">Active</option>
+                            <option value="false">Inactive</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-xs-6" data-ng-if="menu.registration">
+                        <label>Registration</label>
+                        <span class="clearfix">{{menu.registration | date:'MMM dd, yyyy'}}</span>
+                    </div>
+                    <div class="clearfix"></div>
+                    <hr />
+                    <div class="form-group text-right">
+                        <button type="button" class="btn btn-default" data-ng-disabled="!(menu.loader | isNullEmpty)" data-ng-click="edit();">New menu</button>
+                        <button type="button" class="btn btn-primary" data-ng-disabled="!(menu.loader | isNullEmpty)" data-ng-click="save();">Save</button>
+                        <div class="pull-left" data-ng-hide="menu.loader == null"><img src="images/loading.gif" /></div>
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <% include ./modal/basic %>
+</body>
+</html>

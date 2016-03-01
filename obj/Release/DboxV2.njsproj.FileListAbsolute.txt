@@ -1,0 +1,2 @@
+C:\Users\MyAgencyPal\Documents\Visual Studio 2015\Projects\DboxV2\DboxV2\obj\Release\DboxV2.njsprojResolveAssemblyReference.cache
+C:\Users\MyAgencyPal\Documents\Visual Studio 2015\Projects\DboxV2\DboxV2\bin\Microsoft.NodejsTools.WebRole.dll

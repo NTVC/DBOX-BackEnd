@@ -1,0 +1,31 @@
+{
+  "name": "DboxV2",
+  "version": "0.0.0",
+  "description": "DboxV2",
+  "main": "app.js",
+  "author": {
+    "name": "MyAgencyPal",
+    "email": ""
+  },
+  "dependencies": {
+    "body-parser": "^1.14.1",
+    "connect-flash": "^0.1.1",
+    "crypto": "0.0.3",
+    "crypto-js": "^3.1.5",
+    "ejs": "^2.3.4",
+    "express": "3.4.4",
+    "express-session": "^1.11.3",
+    "fs": "0.0.2",
+    "getmac": "^1.0.7",
+    "imagemin": "^4.0.0",
+    "mime": "^1.3.4",
+    "mkdirp": "^0.5.1",
+    "mongodb": "^2.1.0",
+    "mongoose": "^4.1.10",
+    "passport": "^0.3.0",
+    "passport-local": "^1.0.0",
+    "path": "^0.12.7",
+    "require": "^2.4.20",
+    "stylus": "*"
+  }
+}

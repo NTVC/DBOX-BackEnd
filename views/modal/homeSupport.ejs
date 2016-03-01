@@ -1,0 +1,66 @@
+<div id="supportModal" class="modal fade" data-backdrop="static" data-ng-controller="supportModalController">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">
+                    <i class="<%= icon %>"></i> <%= title %>
+                </h4>
+            </div>
+        <div class="modal-body">
+        
+            <div class="pt15 alert alert-warning" data-ng-hide="support.error == null" role="alert">
+                <div data-ng-bind-html="support.error | unsafe"></div>
+            </div>
+        
+            <div class="form-group" data-ng-if="support._id">
+                <label>Id</label>
+                <span>{{support._id}}</span>
+            </div>
+        
+            <div class="form-group">
+                <label>Title</label>
+                <input type="text" class="form-control" placeholder="Title" data-ng-model="support.title" maxlength="100" />
+            </div>
+            <div class="form-group">
+                <label>Message</label>
+                <textarea data-ng-model="support.message" class="form-control h200" rows="7"></textarea>
+            </div>
+            <div class="form-group">
+                <label>E-mail</label>
+                <input type="text" class="form-control" placeholder="E-mail" data-ng-model="support.email" maxlength="100" />
+            </div>
+            <div class="form-group">
+                <label>Phone</label>
+                <input type="text" class="form-control" placeholder="Phone" data-ng-model="support.phone" maxlength="100" />
+            </div>
+            <div class="form-group pull-left mr15">
+                <label>Country</label>
+                <select class="form-control w200" data-ng-model="support.country">
+                    <option value="">Select</option>
+                    <option data-ng-repeat="data in countries" value="{{data.code}}">{{data.name}}</option>
+                </select>
+            </div>
+            <div class="form-group pull-left mr15">
+                <label>Status</label>
+                <select data-ng-model="support.status" class="form-control w150" data-bool-value="">
+                    <option value="true" selected>Active</option>
+                    <option value="false">Inactive</option>
+                </select>
+            </div>
+            <div class="form-group" data-ng-if="support.registration">
+                <label>Registration</label>
+                <span class="clearfix">{{support.registration | date:'MMM dd, yyyy'}}</span>
+            </div>
+        
+            <div class="clearfix"></div>
+        
+        </div>
+        <div class="modal-footer">
+            <div class="pull-left" data-ng-hide="support.loader == null"><img src="images/loading.gif" /></div>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" data-ng-disabled="support.loader != null" data-ng-click="save();">Save</button>
+        </div>
+    </div>
+    </div>
+</div>

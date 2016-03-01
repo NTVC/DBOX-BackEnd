@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Go live Administration</title>
+	<% include ./common/meta %>    
+
+    <link href="./stylesheets/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="./stylesheets/bootstrap-theme.css" rel="stylesheet" type="text/css" />
+    <link href="./stylesheets/login.css" rel="stylesheet" type="text/css" />
+
+	<script src="./javascripts/jquery.js" type="text/javascript"></script>
+    <script src="./javascripts/bootstrap.js" type="text/javascript"></script>
+    <script src="./javascripts/angular.js" type="text/javascript"></script>
+</head>
+<body ng-app="">
+    <!--login modal-->
+    <div id="loginModal" class="modal show" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" style="max-width:400px; margin:30px auto;">
+            <div class="modal-content">
+                <div class="modal-body text-center">
+                    <img src="./images/logo-golive.png" class="wMax p15" />
+                    <div class="pt15"></div>
+                    <form class="form col-md-12 center-block" action="/login" method="post">
+                        <div class="form-group">
+                            <input type="text" name="username" class="form-control input-lg" placeholder="Username" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" name="password" class="form-control input-lg" placeholder="Password" required>
+                        </div>
+                        <div class="form-group w100" data-ng-hide="loader == true">
+                            <button class="btn btn-primary btn-lg btn-block" data-ng-click="loader = true;">Login</button>
+                        </div>
+						<div class="form-group text-center" data-ng-if="loader == true">
+							<img class="wMax" src="images\loading.gif" />
+						</div>
+						
+						<% for(var i in messages) { %>
+						<div class="bg-danger alert alert-danger" role="alert">
+							<div class="flash">
+								<%= messages[i] %>
+							</div>
+						</div>
+						<% } %>
+                    </form>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

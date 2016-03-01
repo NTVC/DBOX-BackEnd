@@ -1,0 +1,28 @@
+<div id="nP-success"><span>Your update has been saved</span></div>
+<div id="nP-error"><span>The requested operation has failed</span></div>
+<a href="javascript;" class="scroll-top off">
+  <span class="glyphicon glyphicon-chevron-up"></span>
+</a>
+
+<!-- MAIN MODAL -->
+<div class="modal fade" data-backdrop="static" id="genericModal" tabindex="-1" role="dialog" aria-labelledby="main-modal-label" aria-hidden="true" data-ng-controller="genericModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">
+          <span aria-hidden="true">&times;</span>
+          <span class="sr-only">Close</span>
+        </button>
+        <h4 class="modal-title">{{modal.title}}</h4>
+      </div>
+      <div class="modal-body" data-ng-bind-html="modal.body | unsafe"></div>
+      <div class="modal-footer">
+        <div data-ng-if="modal.loader != null" class="pull-left">
+          <img src="images/loading.gif" />
+        </div>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button data-ng-if="modal.button_class != null" type="button" data-ng-click="modalAction(modal.invoke);" data-ng-disabled="modal.loader != null" class="btn btn-{{modal.button_class}}">{{modal.button_label}}</button>
+      </div>
+    </div>
+  </div>
+</div>

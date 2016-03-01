@@ -1,0 +1,70 @@
+[
+    {
+        "id": 1,
+        "title": "Autos & Vehicles"
+    },
+    {
+        "id": 2,
+        "title": "Comedy"
+    },
+    {
+        "id": 3,
+        "title": "Education"
+    },
+    {
+        "id": 4,
+        "title": "Entertainment"
+    },
+    {
+        "id": 5,
+        "title": "Film & Animation"
+    },
+    {
+        "id": 6,
+        "title": "Gaming"
+    },
+    {
+        "id": 7,
+        "title": "Howto & Style"
+    },
+    {
+        "id": 8,
+        "title": "Music"
+    },
+    {
+        "id": 9,
+        "title": "News & Politics"
+    },
+    {
+        "id": 10,
+        "title": "Nonprofits & Activism"
+    },
+    {
+        "id": 11,
+        "title": "People & Blogs"
+    },
+    {
+        "id": 12,
+        "title": "Pets & Animals"
+    },
+    {
+        "id": 13,
+        "title": "Religions"
+    },
+    {
+        "id": 14,
+        "title": "Science & Technology"
+    },
+    {
+        "id": 15,
+        "title": "Sports"
+    },
+    {
+        "id": 16,
+        "title": "Travel & Events"
+    },
+    {
+        "id": 30,
+        "title": "Others"
+    }
+]

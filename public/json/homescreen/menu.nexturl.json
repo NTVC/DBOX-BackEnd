@@ -1,0 +1,9 @@
+﻿[
+{"title": "Home","value": "gethomescreenmenu", "submenu": false},
+{"title": "Community channels","value": "getcommunitycountries", "submenu": true},
+{"title": "Live tv","value": "getlivecountries", "submenu":  true},
+{"title": "Movies","value": "getmoviecategories", "submenu": true},
+{"title": "Tv Series","value": "gettvseriescategories","submenu": true},
+{"title": "Youtubers","value": "getyoutubercategories","submenu": true}
+]
+

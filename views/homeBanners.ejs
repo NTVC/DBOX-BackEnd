@@ -1,0 +1,148 @@
+<html ng-app="dbox">
+<head>
+	<% include ./common/meta %>
+
+    <title><%= title %></title>   
+	<% include ./common/css %> 
+
+	<% include ./common/javascript %>
+	<script src="./javascripts/jquery-ui.min.js?v=<%-GLOBAL.environment_settings.version%>"></script>
+	<script src="./javascripts/views/homeBanners.js?v=<%-GLOBAL.environment_settings.version%>"></script>
+	<script src="./javascripts/views/homeBanners.content.js?v=<%-GLOBAL.environment_settings.version%>"></script>
+</head>
+<body>
+    <% include ./common/sidebar %>
+
+    <div class="container" id="container" data-ng-controller="homeBannersController">
+       
+	   <div class="col-xs-12 pside0">
+            <div class="title text-muted">
+                <div class="pull-left"><h2><i class="<%= icon %>"></i> <%= title %></h2></div>
+					<div class="pull-right" data-ng-if="banners.length < <%-GLOBAL.HOMESCREEN_LIMIT.BANNERS.MAX_BLOCKS%>"><button type="button" class="btn btn-primary mt15" data-toggle="modal" data-target="#addListModal">New Banner</button></div>
+				<div class="clearfix"></div>
+            </div>
+             
+			<hr/>
+		</div>
+	   <div class="clearfix"></div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">Filter information</div>
+            <div class="panel-body">
+
+                <div class="col-xs-12 col-lg-4 mb10">
+                    <div class="input-group">
+                        <span class="input-group-addon">Search</span>
+                        <input type="text" class="form-control" data-ng-model="filter.search" maxlength="30" data-ng-enter="loadAll()" placeholder="title" />
+                    </div>
+                </div>
+                <div class="col-xs-12 col-lg-3 mb10">
+                    <div class="input-group">
+                        <span class="input-group-addon">Country</span>
+                        <select class="form-control" data-ng-model="filter.country" data-ng-change="loadAll()">
+                            <option data-ng-repeat="data in countries" data-ng-selected="data.code == filter.country" value="{{data.code}}">{{data.name}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-lg-2 mb10">
+                    <div class="input-group">
+                        <span class="input-group-addon">Status</span>
+                        <select class="form-control" data-ng-model="filter.status" data-ng-change="loadAll()">
+                            <option value="">All</option>
+                            <option value="1">Active</option>
+                            <option value="0">Inactive</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-lg-2 mb10">
+                    <button type="button" class="btn btn-primary" data-ng-click="search();">Go</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-12 col-xs-12 pside0 banner-order">
+
+            <div data-ng-show="banners == null" class="text-center"><img src="images/loading.gif" /></div>
+            <div class="text-center" data-ng-if="banners.length == 0">It does not have any content</div>
+
+			<div id="{{data._id}}" class="panel panel-default clearfix" data-ng-repeat="data in banners">
+				<div class="panel-heading">
+					<div class="pull-left">{{data.title}}</div>
+					<div class="pull-right">
+						<a href="javascript:;" data-ng-click="edit(data);"><span class="glyphicon glyphicon-pencil"></span></a>
+						<a href="javascript:;" data-ng-click="delete(data);"><span class="glyphicon glyphicon-trash"></span></a>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+
+				<div class="panel-body">
+
+					<div class="col-xs-12 col-lg-8 pside0">
+                        
+                        <div class="clearfix"></div>
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>&nbsp;</th>
+                                    <th>Invoke</th>
+                                    <th>Paremeter</th>
+                                    <th>Registration</th>
+                                    <th>Status</th>
+                                    <th class="text-right text-ub">Total <b class="pgCounter">{{data.list.length}}</b> items</th>
+                                </tr>
+                            </thead>
+                            <tbody class="content-order">
+                                <tr data-ng-show="data.list == null"><td colspan="100%" class="text-center"><img src="images/loading.gif" /></td></tr>
+                                <tr data-ng-show="data.list.length == 0"><td colspan="100%" class="text-center">It does not have any content</td></tr>
+                                <tr id="{{b._id}}" class="wMax" data-ng-repeat="b in data.list">
+                                    <td width="45"><div class="sThumb zoom" style="background-image:url('{{b.banner | getImage}}')"></div></td>
+                                    <td>{{(b.invoke | isNullEmpty) ? "none" : b.invoke}}</td>
+                                    <td><a target="_blank" href="{{b.parameter}}" data-ng-if="b.invoke">{{b.parameter}}</a></td>
+                                    <td>{{b.registration | date:'MMM dd, yyyy'}}</td>
+                                    <td><div data-ng-bind-html="b.status | status | unsafe"></div></td>
+                                    <td class="text-right" width="85">
+                                        <a href="javascript:;" data-ng-click="edit_content(b);"><span class="glyphicon glyphicon-pencil"></span></a>
+                                        <a href="javascript:;" data-ng-click="delete_content(b);"><span class="glyphicon glyphicon-trash"></span></a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="clearfix"></div>
+					</div>
+					<div class="col-xs-12 col-lg-4 pside0 pl15">
+
+						<div class="form-group">
+							<label>Title</label>
+							<span class="clearfix">{{data.title}}</span>
+						</div>
+						<div class="form-group" data-ng-if="data.description">
+							<label>Description</label>
+							<div class="clearfix hM350">{{data.description}}</div>
+						</div>
+						<div class="form-group">
+							<label>Timer</label>
+							<div class="clearfix">{{data.timer / 1000}} seconds</div>
+						</div>
+						<div class="form-group">
+							<label>Status</label>
+							<div class="clearfix"><span class="text-{{data.status === true ? 'success' : 'danger'}}">{{data.status === true ? "Active" : "Inactive"}}</span></div>
+						</div>
+						<div class="form-group mt15" data-ng-if="data.list.length < <%-GLOBAL.HOMESCREEN_LIMIT.BANNERS.MAX_ITEMS%>">
+							<button type="button" class="btn btn-primary" data-ng-click="edit_content({homebanners_id: data._id});">Add content</button>
+						</div>
+						<div class="clearfix"></div>
+
+					</div>
+					<div class="clearfix"></div>
+
+				</div>
+          </div>
+
+        </div>
+	
+    </div>
+    <% include ./modal/homebanners %>
+    <% include ./modal/basic %>
+</body>
+</html>
