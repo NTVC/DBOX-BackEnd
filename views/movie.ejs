@@ -31,10 +31,19 @@
 					<div class="panel-heading">Filter information</div>
 					<div class="panel-body">
 						
-						<div class="col-xs-12 col-md-4 mb10">
+						<div class="col-xs-12 col-md-3 mb10">
 							<div class="input-group">
 								<span class="input-group-addon">Search</span>
 								<input type="text" class="form-control" data-ng-model="filter.search" maxlength="30" placeHolder="title or tags" data-ng-enter="search()" />
+							</div>
+						</div>
+						<div class="col-xs-5 col-md-3 mb10">
+							<div class="input-group">
+								<span class="input-group-addon">Published</span>
+								<select class="form-control" data-ng-model="filter.isPublished" data-ng-change="rSearch()">
+									<option value="1">Available</option>
+									<option value="0">Unavailable</option>
+								</select>
 							</div>
 						</div>
 						<div class="col-xs-5 col-md-2 mb10">

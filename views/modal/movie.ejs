@@ -19,14 +19,16 @@
                     <div class="pic" style="background:url('{{movie.thumb | getImage}}');"></div>
                     <div class="clearfix"></div>
                     <a href="javascript:;" onclick="getFileThumb('#movieThumb')">edit thumb</a>
-                    <input id="movieThumb" name="thumb_file" type="file" class="hidden" accept="image/*" data-key="movieModal.movie.thumb" />
+                    <input id="movieThumb" onchange="readURL(this, '#movieThumb');" name="thumb_file" type="file" class="hidden" accept="image/*" data-key="movieModal.movie.thumb" />
+                    <input type="hidden" name="thumb" value="{{movie.thumb}}" />
                 </div>
 
                 <div class="col-lg-4 text-center">
                     <div class="pic" style="background:url('{{movie.cover | getImage}}');"></div>
                     <div class="clearfix"></div>
                     <a href="javascript:;" onclick="getFileThumb('#movieCover')">edit cover</a>
-                    <input id="movieCover" name="cover_file" type="file" class="hidden" accept="image/*" data-key="movieModal.movie.cover" />
+                    <input id="movieCover" onchange="readURL(this, '#movieCover');" name="cover_file" type="file" class="hidden" accept="image/*" data-key="movieModal.movie.cover" />
+                    <input type="hidden" name="cover" value="{{movie.cover}}" />
                 </div>
 
                 <div class="clearfix"></div>
@@ -43,7 +45,6 @@
                     <label>Url</label>
                     <span>{{movie.url}}</span>
                 </div>
-                <input name="url" type="hidden" data-ng-model="movie.url" />
                 
                 <div class="clearfix"></div>
                 
@@ -57,7 +58,6 @@
                 <div class="col-xs-6">
                     <label>Published</label>
                     <div data-ng-bind-html="movie.isPublished | isPublished | unsafe"></div>
-                    <input name="isPublished" type="hidden" data-ng-model="movie.isPublished" value="" />
                 </div>
                 
                 <div class="clearfix"></div>
@@ -119,19 +119,16 @@
                         <div class="col-lg-4 col-xs-12 pside0" data-ng-hide="movie.lenght | isNullEmpty">
                             <label>Length</label>
                             <span class="clearfix">{{movie.lenght}}</span>
-                            <input type="hidden" name="lenght" data-ng-model="movie.lenght" value="" />
                         </div>
                         
                         <div class="col-lg-4 col-xs-12 pside0" data-ng-hide="movie.exibitiondate | isNullEmpty">
                             <label>Exibition Date</label>
                             <span class="clearfix">{{movie.exibitiondate | date:'MMM dd, yyyy'}}</span>
-                            <input type="hidden" name="exibitiondate" data-ng-model="movie.exibitiondate" value="" />
                         </div>
                         
                         <div class="col-lg-4 col-xs-12 pside0" data-ng-hide="movie.country | isNullEmpty">
                             <label>Country</label>
                             <span class="clearfix">{{movie.country}}</span>
-                            <input type="hidden" name="country" data-ng-model="movie.country" value="" />
                         </div>
             
                         <div class="clearfix">&nbsp;</div>
@@ -139,19 +136,16 @@
                         <div class="col-lg-4 col-xs-12 pside0" data-ng-hide="movie.year | isNullEmpty">
                             <label>Year</label>
                             <span class="clearfix">{{movie.year}}</span>
-                            <input type="hidden" name="year" data-ng-model="movie.year" value="" />
                         </div>
                         
                         <div class="col-lg-4 col-xs-12 pside0" data-ng-hide="movie.rated | isNullEmpty">
                             <label>Rated</label>
                             <span class="clearfix">{{movie.rated}}</span>
-                            <input type="hidden" name="rated" data-ng-model="movie.rated" value="" />
                         </div>
             
                         <div class="col-lg-4 col-xs-12 pside0" data-ng-hide="movie.awards | isNullEmpty">
                             <label>Awards</label>
                             <span class="clearfix">{{movie.awards}}</span>
-                            <input type="hidden" name="awards" data-ng-model="movie.awards" value="" />
                         </div>
             
                         <div class="clearfix">&nbsp;</div>
@@ -159,24 +153,36 @@
                         <div class="form-group" data-ng-hide="movie.director | isNullEmpty">
                             <label>Director</label>
                             <span class="clearfix">{{movie.director}}</span>
-                            <input type="hidden" name="director" data-ng-model="movie.director" value="" />
                         </div>
             
                         <div class="form-group" data-ng-hide="movie.actors | isNullEmpty">
                             <label>Actors</label>
                             <span class="clearfix">{{movie.actors}}</span>
-                            <input type="hidden" name="actors" data-ng-model="movie.actors" value="" />
                         </div>
                         
                         <div class="form-group" data-ng-hide="movie.writer | isNullEmpty">
                             <label>Writer</label>
                             <span class="clearfix">{{movie.writer}}</span>
-                            <input type="hidden" name="writer" data-ng-model="movie.writer" value="" />
                         </div>
                         <div class="clearfix"></div>
                     </div>
                     
-                    <input type="hidden" data-ng-model="movie.save" name="save" value="">
+                    <input type="hidden" name="_id" value="{{movie._id}}"/>
+                    
+                    <input name="isPublished" type="hidden" value="{{movie.isPublished}}" />
+                    <input type="hidden" name="writer" value="{{movie.writer}}" />
+                    <input type="hidden" name="actors" value="{{movie.actors}}" />
+                    <input type="hidden" name="director" value="{{movie.director}}" />
+                    <input type="hidden" name="awards" value="{{movie.awards}}" />
+                    <input type="hidden" name="rated" value="{{movie.rated}}"/>
+                    <input type="hidden" name="year" value="{{movie.year}}" />
+                    <input type="hidden" name="country" value="{{movie.country}}" />
+                    <input type="hidden" name="exibitiondate" value="{{movie.exibitiondate}}" />
+                    <input type="hidden" name="lenght" value="{{movie.lenght}}" />
+                    <input name="url" type="hidden" value="{{movie.url}}" />
+                    
+                    <input type="hidden" data-ng-model="movie.save" name="save" value=""/>
+                    
                 </form>
                 
                 <div class="progress" data-ng-hide="movie.loader == null">
@@ -189,7 +195,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-default" data-ng-if="movie.search" data-dismiss="modal" data-toggle="modal" data-target="#searchMovieModal">Back</button>
-                <button type="button" class="btn btn-primary" data-ng-disabled="movie.loader != null || ( (!movie.isPublished) && movie._id)" data-ng-click="save();">Save</button>
+                <button type="button" class="btn btn-primary" data-ng-disabled="movie.loader != null" data-ng-click="save();">Save</button>
             </div>
         </div>
     </div>

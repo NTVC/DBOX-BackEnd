@@ -13,6 +13,7 @@ dbox.controller('movieListController', function ($scope, genericService) {
     $scope.filter = {
         search: '',
         active: '1',
+        isPublished: '1',
         pg: {
             index: 0, 
             limit: '25',
@@ -24,8 +25,6 @@ dbox.controller('movieListController', function ($scope, genericService) {
     // RESET SEARCH FILTER
     $scope.rSearch = function () {
         
-        $scope.filter.search = "";
-        $scope.filter.status = "";
         $scope.filter.pg.index = 0;
         $scope.search();
     };
@@ -52,17 +51,18 @@ dbox.controller('movieListController', function ($scope, genericService) {
         
         var filter = {};
         
-        
         filter.list = true;
         filter.search = $scope.filter.search;
         filter.active = $scope.filter.active;
+        filter.isPublished = $scope.filter.isPublished;
         
         if (isCounter) {
             filter.count = true;
         }
-        else {
-            filter.pg_index = $scope.filter.pg.index;
-            filter.pg_limit = $scope.filter.pg.limit;
+        
+        filter.pg = {
+            index: $scope.filter.pg.index,
+            limit: $scope.filter.pg.limit
         }
         
         return filter;
@@ -372,4 +372,6 @@ function doneSaveMovie(data) {
     getScope("container").rSearch();
 
     resetFileUploud(movieThumb);
+    resetFileUploud(movieCover);
+    resetFileUploud(movie_file);
 }

@@ -8,13 +8,17 @@ var communityVideoShema = new Schema({
    
     community_id: {type: Schema.ObjectId, ref: 'communityShema'},
     community_list_id: {type: Schema.ObjectId, ref: 'communityListShema'},
+    title: {
+        type: String,
+        trim: true
+    },
     url: {
         type: String,
         trim: true
     },
-    title: {
-        type: String,
-        trim: true
+    isPublished: {
+        type: Boolean,
+        default: true
     },
     description: {
         type: String,

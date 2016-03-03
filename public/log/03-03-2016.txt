@@ -1,0 +1,32 @@
+Date: 2016-03-03T17:23:01.771Z
+ uncaughtException: ValidationError: CastError: Cast to ObjectID failed for value "" at path "community_list_id"
+Date: 2016-03-03T17:32:59.574Z
+ uncaughtException: ValidationError: CastError: Cast to ObjectID failed for value "" at path "community_list_id"
+Date: 2016-03-03T17:33:28.880Z
+ uncaughtException: ValidationError: CastError: Cast to ObjectID failed for value "" at path "community_list_id"
+Date: 2016-03-03T17:40:54.489Z
+ uncaughtException: Can't set headers after they are sent.
+Error: Can't set headers after they are sent.
+    at ServerResponse.OutgoingMessage.setHeader (_http_outgoing.js:335:11)
+    at ServerResponse.res.setHeader (/Users/developer/Documents/DBOX/GIT HUB/DBOX-BackEnd/node_modules/express/node_modules/connect/lib/patch.js:63:22)
+    at ServerResponse.setWriteHeadHeaders (/Users/developer/Documents/DBOX/GIT HUB/DBOX-BackEnd/node_modules/express-session/node_modules/on-headers/index.js:82:19)
+    at ServerResponse.writeHead (/Users/developer/Documents/DBOX/GIT HUB/DBOX-BackEnd/node_modules/express-session/node_modules/on-headers/index.js:41:36)
+    at done (/Users/developer/Documents/DBOX/GIT HUB/DBOX-BackEnd/controllers/CommunityVideoController.js:241:9)
+    at /Users/developer/Documents/DBOX/GIT HUB/DBOX-BackEnd/controllers/CommunityVideoController.js:219:17
+    at /Users/developer/Documents/DBOX/GIT HUB/DBOX-BackEnd/node_modules/mongoose/lib/document.js:1688:19
+    at module.exports.hook.proto.(anonymous function).handleError (/Users/developer/Documents/DBOX/GIT HUB/DBOX-BackEnd/node_modules/mongoose/node_modules/hooks-fixed/hooks.js:40:22)
+    at module.exports.hook.proto.(anonymous function)._next (/Users/developer/Documents/DBOX/GIT HUB/DBOX-BackEnd/node_modules/mongoose/node_modules/hooks-fixed/hooks.js:46:22)
+    at fnWrapper (/Users/developer/Documents/DBOX/GIT HUB/DBOX-BackEnd/node_modules/mongoose/node_modules/hooks-fixed/hooks.js:186:18)
+    at /Users/developer/Documents/DBOX/GIT HUB/DBOX-BackEnd/node_modules/mongoose/lib/schema.js:198:13
+    at Document.$__validate.complete (/Users/developer/Documents/DBOX/GIT HUB/DBOX-BackEnd/node_modules/mongoose/lib/document.js:1108:7)
+    at /Users/developer/Documents/DBOX/GIT HUB/DBOX-BackEnd/node_modules/mongoose/lib/document.js:1137:20
+    at ObjectId.SchemaType.doValidate (/Users/developer/Documents/DBOX/GIT HUB/DBOX-BackEnd/node_modules/mongoose/lib/schematype.js:645:22)
+    at /Users/developer/Documents/DBOX/GIT HUB/DBOX-BackEnd/node_modules/mongoose/lib/document.js:1133:9
+    at doNTCallback0 (node.js:419:9)
+
+Date: 2016-03-03T17:41:06.015Z
+ uncaughtException: ValidationError: CastError: Cast to ObjectID failed for value "" at path "community_list_id"
+Date: 2016-03-03T17:42:07.738Z
+ uncaughtException: ValidationError: CastError: Cast to ObjectID failed for value "" at path "community_id", CastError: Cast to ObjectID failed for value "" at path "community_list_id"
+Date: 2016-03-03T17:44:44.667Z
+ uncaughtException: ValidationError: CastError: Cast to ObjectID failed for value "" at path "community_id", CastError: Cast to ObjectID failed for value "" at path "community_list_id"

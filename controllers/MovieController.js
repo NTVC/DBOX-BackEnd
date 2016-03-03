@@ -9,16 +9,7 @@ exports.process = function (req, res) {
     // LIST MOVIES
     if (req.query.list != undefined) {
         
-        var params = {};
-        
-        params.filter = {
-            search: req.query.search, 
-            active: req.query.active, 
-            pg: {
-                index: req.query.pg_index, 
-                limit: req.query.pg_limit
-            }
-        };
+        var params = {filter: req.query};
         
         // COUNT ONLY
         if (req.query.count != undefined) {
@@ -66,7 +57,8 @@ var listAllFilter = function (params) {
                     { "tags": new RegExp(params.filter.search, 'i') }
                 ]
             } : {},
-            (params.filter.active == '' ? {} : ({ "active" : JSON.parse(params.filter.active) }))
+            (params.filter.active == '' ? {} : ({ "active" : JSON.parse(params.filter.active) })),
+            { "isPublished" : GLOBAL.getBoolean(params.filter.isPublished) }
         ]
     });
     return filter;
@@ -191,7 +183,7 @@ var getParamsMovie = function (req, obj) {
     else
         _obj = obj;
 
-    if (req.query._id != undefined) {
+    if (GLOBAL.isObjectId(req.query._id)) {
         _obj._id = req.query._id;
     }
 
@@ -224,6 +216,8 @@ var getParamsMovie = function (req, obj) {
 
 var saveByStep = function (callParams) {
     
+    path = require('path');
+    
     // GET OBJ
     if (callParams.step == 1) {
         
@@ -231,7 +225,7 @@ var saveByStep = function (callParams) {
         callParams.obj = null;
         
         // UPDATE
-        if (callParams.req.body._id !== undefined) {
+        if (GLOBAL.isObjectId(callParams.req.body._id)) {
             callParams.obj = getParamsMovie(callParams.req, null);
             findOneCB(callParams.req.body._id, saveByStep, callParams);
         }
@@ -259,7 +253,7 @@ var saveByStep = function (callParams) {
                 
                 if (r) {
                     // DELETE OLD FILE
-                    if(callParams.old_obj)
+                    if(callParams.old_obj && GLOBAL.getString(callParams.old_obj.thumb) != '')
                         GLOBAL.deleteFile(GLOBAL.path.SERVER_MOVIE + path.basename(callParams.old_obj.thumb));
 
                     callParams.obj.thumb = GLOBAL.path.WEB_MOVIE + thumbName;
@@ -307,7 +301,7 @@ var saveByStep = function (callParams) {
                 
                 if (r) {
                     // DELETE OLD FILE
-                    if (callParams.old_obj)
+                    if (callParams.old_obj && GLOBAL.getString(callParams.old_obj.cover) != '')
                         GLOBAL.deleteFile(GLOBAL.path.SERVER_MOVIE_COVER + path.basename(callParams.old_obj.cover));
 
                     callParams.obj.cover = GLOBAL.path.WEB_MOVIE_COVER + thumbName;
@@ -358,7 +352,7 @@ var saveByStep = function (callParams) {
         GLOBAL.db_open();
         
         // UPDATE
-        if (callParams.req.body._id !== undefined) {
+        if (GLOBAL.isObjectId(callParams.req.body._id)) {
             
             Movie.findByIdAndUpdate(callParams.req.body._id, callParams.obj, function (err) {
                 

@@ -394,59 +394,90 @@
     </div>
   </div>
 </div>
+
+<!-- UPLOUD AND UPDATE FILE -->
 <div id="addVideoModal" class="modal fade" data-backdrop="static" data-ng-controller="addVideoModalController">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <h4 class="modal-title">Add Video</h4>
-      </div>
-      <div class="modal-body">
-        <div class="pt15 alert alert-warning" data-ng-hide="video.error == null" role="alert">
-          <div data-ng-bind-html="video.error | unsafe"></div>
-        </div>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Add Video</h4>
+            </div>
+            <div class="modal-body">
+          
+                <form id="fVideo" method="POST" enctype="multipart/form-data" data-ng-show="!video.loader">
+                        
+                    <div class="pt15 alert alert-warning" data-ng-hide="video.error == null" role="alert">
+                        <div data-ng-bind-html="video.error | unsafe"></div>
+                    </div>
 
-        <div class="form-group">
-          <label>Title</label>
-          <input type="text" class="form-control" placeholder="Title" data-ng-model="video.title" maxlength="50" />
-        </div>
+                    <div class="form-group">
+                        <label>Title</label>
+                        <input name="title" type="text" class="form-control" placeholder="Title" data-ng-model="video.title" maxlength="50" />
+                    </div>
+                    <div class="form-group ng-scope" data-ng-if="!video.url">
+                        <label>File</label>
+                        <input id="video_file" name="file" type="file" class="form-control" data-ng-model="video.file" accept="video/*">
+                    </div>
+                    <div class="form-group" data-ng-if="video.url && video.isPublished">
+                        <label>Url</label>
+                        <span>{{video.url}}</span>
+                    </div>
+                    <input name="url" type="hidden" data-ng-model="video.url" />
+                    
+                    <div class="clearfix"></div>
+                    
+                    <div class="form-group">
+                        <label>Published</label>
+                        <div data-ng-bind-html="video.isPublished | isPublished | unsafe"></div>
+                    </div>
+                        
+                    <div class="form-group">
+                        <label>Year</label>
+                        <input name="year" type="text" class="form-control" placeholder="Year" data-ng-model="video.year" maxlength="4" />
+                    </div>
 
-        <div class="form-group">
-          <label>Url</label>
-          <input type="text" class="form-control" placeholder="Url" data-ng-model="video.url" maxlength="1000" />
-        </div>
-
-        <div class="form-group">
-          <label>Year</label>
-          <input type="text" class="form-control" placeholder="Year" data-ng-model="video.year" maxlength="4" />
-        </div>
-
-        <div class="form-group">
-          <label>Description</label>
-          <textarea class="form-control" data-ng-model="video.description" rows="7"></textarea>
-        </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea name="description" class="form-control" data-ng-model="video.description" rows="7"></textarea>
+                    </div>
         
-        <div class="clearfix"></div>
-        <div class="col-xs-6 pl0">
-            <label>Status</label>
-            <select data-ng-model="video.status" class="form-control" data-bool-value="">
-                <option value="true" selected>Active</option>
-                <option value="false">Inactive</option>
-            </select>
-        </div>
-        <div class="col-xs-6 pside0" data-ng-if="video.registration">
-            <label>Registration</label>
-            <span class="clearfix">{{video.registration | date:'MMM dd, yyyy'}}</span>
-        </div>
-        <div class="clearfix"></div>
+                    <div class="clearfix"></div>
+                    <div class="col-xs-6 pl0">
+                        <label>Status</label>
+                        <select name="status" data-ng-model="video.status" class="form-control" data-bool-value="">
+                            <option value="true" selected>Active</option>
+                            <option value="false">Inactive</option>
+                        </select>
+                    </div>
+                    <div class="col-xs-6 pside0" data-ng-if="video.registration">
+                        <label>Registration</label>
+                        <span class="clearfix">{{video.registration | date:'MMM dd, yyyy'}}</span>
+                    </div>
+                    <div class="clearfix"></div>
+                    
+                    <!-- BASIC DATA -->
+                    <input type="hidden" name="_id" value="{{video._id}}"/>
+                    <input type="hidden" name="community_list_id" value="{{list._id}}"/>
+                    <input type="hidden" name="community_id" value="{{list.community_id}}"/>
+                    <input type="hidden" name="url" value="{{video.url}}"/>
+                    <input type="hidden" name="registration" value="{{video.registration}}"/>
+                    <input type="hidden" name="isPublished" value="{{video.isPublished}}" />
+                    
+                    <input type="hidden" data-ng-model="video.save" name="save" value=""/>
+                    
+            </form>
+        
+            <div class="progress" data-ng-hide="video.loader == null">
+                <div class="progress-bar progress-bar-info progress-bar-striped upPercent active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+                    <span id="upPercent">0</span>%
+                </div>
+            </div>
 
       </div>
       <div class="modal-footer">
-        <div class="pull-left" data-ng-hide="video.loader == null">
-          <img src="images/loading.gif" />
-        </div>
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary" data-ng-disabled="video.loader != null" data-ng-click="save();">Save</button>
       </div>

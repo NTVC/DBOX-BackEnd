@@ -58,7 +58,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'ejs');
 
-app.use(express.bodyParser({ maxFieldsSize: '50mb' }));
+app.use(express.bodyParser({ limit: 1024 * 1024 * 1024 * 500}));
 app.use(express.cookieParser());
 app.use(require('express-session')({
     saveUninitialized: true, 
