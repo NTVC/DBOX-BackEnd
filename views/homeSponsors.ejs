@@ -115,7 +115,7 @@
                         <div class="pic" style="background:url('{{sponsor.poster | getImage}}');"></div>
                         <div class="clearfix"></div>
                         <a href="javascript:;" onclick="getFileThumb('#sponsorPoster')">edit poster</a>
-                        <input id="sponsorPoster" type="file" class="hidden" accept="image/*" data-key="sponsorModal.sponsor.poster" />
+                        <input id="sponsorPoster" onchange="readURL(this, '#sponsorPoster');" type="file" class="hidden" accept="image/*" data-key="sponsorModal.sponsor.poster" />
                     </div>
                     <div class="col-md-8 pside0">
                         <label>Name</label>

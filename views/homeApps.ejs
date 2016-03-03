@@ -119,7 +119,7 @@
                         <div class="pic" style="background:url('{{app.thumb | getImage}}');"></div>
                         <div class="clearfix"></div>
                         <a href="javascript:;" onclick="getFileThumb('#appThumb')">edit thumb</a>
-                        <input id="appThumb" type="file" class="hidden" accept="image/*" data-key="appModal.app.thumb" />
+                        <input id="appThumb" onchange="readURL(this, '#appThumb');" type="file" class="hidden" accept="image/*" data-key="appModal.app.thumb" />
 					</div>
 					<div class="col-md-8 pside0">
 						<label>Name</label>

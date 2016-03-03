@@ -24,35 +24,35 @@
                 <div class="pic" style="background:url('{{background.home | getImage}}');"></div>
                 <div class="clearfix"></div>
                 <a href="javascript:;" onclick="getFileThumb('#backgroundHome')">edit home</a>
-                <input id="backgroundHome" type="file" class="hidden" accept="image/*" data-key="backgroundModal.background.home" />
+                <input id="backgroundHome" onchange="readURL(this, '#backgroundHome');" type="file" class="hidden" accept="image/*" data-key="backgroundModal.background.home" />
             </div>
             
             <div class="col-xs-6 col-sm-4 text-center">
                 <div class="pic" style="background:url('{{background.live | getImage}}');"></div>
                 <div class="clearfix"></div>
                 <a href="javascript:;" onclick="getFileThumb('#backgroundLive')">edit live TV</a>
-                <input id="backgroundLive" type="file" class="hidden" accept="image/*" data-key="backgroundModal.background.live" />
+                <input id="backgroundLive" onchange="readURL(this, '#backgroundLive');" type="file" class="hidden" accept="image/*" data-key="backgroundModal.background.live" />
             </div>
             
             <div class="col-xs-6 col-sm-4 text-center">
                 <div class="pic" style="background:url('{{background.community | getImage}}');"></div>
                 <div class="clearfix"></div>
                 <a href="javascript:;" onclick="getFileThumb('#backgroundCommunity')">edit community</a>
-                <input id="backgroundCommunity" type="file" class="hidden" accept="image/*" data-key="backgroundModal.background.community" />
+                <input id="backgroundCommunity" onchange="readURL(this, '#backgroundCommunity');" type="file" class="hidden" accept="image/*" data-key="backgroundModal.background.community" />
             </div>
             
             <div class="col-xs-6 col-sm-4 text-center">
                 <div class="pic" style="background:url('{{background.tvseries | getImage}}');"></div>
                 <div class="clearfix"></div>
                 <a href="javascript:;" onclick="getFileThumb('#backgroundTvSeries')">edit tv series</a>
-                <input id="backgroundTvSeries" type="file" class="hidden" accept="image/*" data-key="backgroundModal.background.tvseries" />
+                <input id="backgroundTvSeries" onchange="readURL(this, '#backgroundTvSeries');" type="file" class="hidden" accept="image/*" data-key="backgroundModal.background.tvseries" />
             </div>
             
             <div class="col-xs-6 col-sm-4 text-center">
                 <div class="pic" style="background:url('{{background.youtuber | getImage}}');"></div>
                 <div class="clearfix"></div>
                 <a href="javascript:;" onclick="getFileThumb('#backgroundYoutuber')">edit youtuber</a>
-                <input id="backgroundYoutuber" type="file" class="hidden" accept="image/*" data-key="backgroundModal.background.youtuber" />
+                <input id="backgroundYoutuber" onchange="readURL(this, '#backgroundYoutuber');" type="file" class="hidden" accept="image/*" data-key="backgroundModal.background.youtuber" />
             </div>
             
             <div class="clearfix"></div>

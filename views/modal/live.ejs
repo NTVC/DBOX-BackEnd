@@ -24,14 +24,14 @@
                 <div class="pic" style="background:url('{{live.thumb | getImage}}');"></div>
                 <div class="clearfix"></div>
                 <a href="javascript:;" onclick="getFileThumb('#liveThumb')">edit thumb</a>
-                <input id="liveThumb" type="file" class="hidden" accept="image/*" data-key="liveModal.live.thumb" />
+                <input id="liveThumb" onchange="readURL(this, '#liveThumb');" type="file" class="hidden" accept="image/*" data-key="liveModal.live.thumb" />
               </div>
 
               <div class="col-xs-12 col-lg-4 text-center">
                 <div class="pic" style="background:url('{{live.cover | getImage}}');"></div>
                 <div class="clearfix"></div>
                 <a href="javascript:;" onclick="getFileThumb('#liveCover')">edit cover</a>
-                <input id="liveCover" type="file" class="hidden" accept="image/*" data-key="liveModal.live.cover" />
+                <input id="liveCover" onchange="readURL(this, '#liveCover');" type="file" class="hidden" accept="image/*" data-key="liveModal.live.cover" />
               </div>
               
               <div class="clearfix"></div>

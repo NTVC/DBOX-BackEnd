@@ -70,7 +70,7 @@
             <div class="pic" style="background:url('{{content.banner | getImage}}');"></div>
             <div class="clearfix"></div>
             <a href="javascript:;" onclick="getFileThumb('#contentBanner')">edit banner</a>
-            <input id="contentBanner" type="file" class="hidden" accept="image/*" data-key="addContentModal.content.banner" />
+            <input id="contentBanner" type="file" onchange="readURL(this, '#contentBanner');" class="hidden" accept="image/*" data-key="addContentModal.content.banner" />
         </div>
 
         <div class="col-xs-12 col-lg-8">

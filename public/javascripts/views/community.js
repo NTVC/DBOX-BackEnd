@@ -213,6 +213,8 @@ dbox.controller('communityModalController', function ($scope, genericService) {
             error += errorTemplate('Title');
         if ($scope.community.category == undefined || $scope.community.category.length == 0)
             error += errorTemplate('At least one category');
+        if (isNullorEmpty($scope.community.country))
+            error += errorTemplate('Country');
         if (isNullorEmpty($scope.community.status))
             error += errorTemplate('Status');
         
