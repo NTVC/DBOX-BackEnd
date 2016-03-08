@@ -36,7 +36,7 @@ exports.process = function (req, res) {
     }
     // ---------------------------------------------
     // SAVE OR UPDATE VIDEO OF YOUTUBER
-    else if (GLOBAL.getBoolean(req.body.save)) {
+    else if (req.body.save != undefined) {
         saveByStep({step:1, req: req, res:res});
     }
     // ---------------------------------------------
@@ -79,12 +79,14 @@ var getArrayVideoCount = function (res, params) {
         GLOBAL.db_close();
         res.writeHead(200, { "Content-Type": "text/plain" });
         if (err) {
+            GLOBAL.log(err, null);
             res.end(App_Message.ERROR_IN_PROCESS);
         }
         else {
             res.end(String(total));
         }
     });
+    
 };
 
 // ======================================= =======================================  
@@ -106,6 +108,7 @@ var getArrayVideo = function (res, params) {
             res.end(JSON.stringify(arrayVideo));
         }
         else {
+            GLOBAL.log(err, null);
             res.writeHead(200, { "Content-Type": "text/plain" });
             res.end(App_Message.ERROR_IN_PROCESS);
         }
@@ -125,7 +128,7 @@ var getParamsVideo = function (req, obj) {
     else
         _obj = obj;
     
-    if (req.body._id != undefined) {
+    if (GLOBAL.isObjectId(req.body._id)) {
         _obj._id = req.body._id;
     }
 
@@ -137,6 +140,7 @@ var getParamsVideo = function (req, obj) {
     _obj.year               = GLOBAL.getString(aux.year);
     _obj.status             = GLOBAL.getBoolean(aux.status);
     _obj.registration       = GLOBAL.getString(aux.registration);
+    _obj.isPublished        = GLOBAL.getBoolean(aux.isPublished);
     
     return _obj;
 }
@@ -153,7 +157,7 @@ var saveByStep = function (callParams){
         callParams.obj = null;
 
         // UPDATE
-        if (callParams.req.body._id !== undefined) {
+        if (GLOBAL.isObjectId(callParams.req.body._id )) {
             callParams.obj = getParamsVideo(callParams.req, null);
             saveByStep(callParams);
         }
@@ -164,16 +168,51 @@ var saveByStep = function (callParams){
             saveByStep(callParams);
         }
     }
-    // SAVE / UPDATE
+    // VIDEO MOVIE
     else if (callParams.step == 2) {
+        
+        callParams.step = 3;
+        
+        var file = callParams.req.files.file;
+
+        // FILE EXIST
+        if (file) {
+            
+            var path = require('path');
+            var ext = path.extname(file.name);
+            var thumbName = String(callParams.obj.id) + ext;
+            
+            GLOBAL.saveFile(file, thumbName, GLOBAL.path.SERVER_YOUTUBERS_PATH, function (r, thumbName) {
+                
+                if (r) {
+                    callParams.obj.url = GLOBAL.path.SERVER_YOUTUBERS_PATH + thumbName;
+                }
+                saveByStep(callParams);
+
+            });
+           
+        }
+        else{
+            saveByStep(callParams);
+        }
+        
+    }
+    // SAVE / UPDATE
+    else if (callParams.step == 3) {
 
         GLOBAL.db_open();
         
         // UPDATE
-        if (callParams.req.body._id !== undefined) {
+        if (GLOBAL.isObjectId(callParams.req.body._id)) {
 
             YoutuberVideo.findByIdAndUpdate(callParams.req.body._id, callParams.obj, function (err) {
                 GLOBAL.db_close();
+                
+                // DELETE TEMP FILE
+                if(err){
+                    GLOBAL.deleteFile(callParams.obj.url);
+                }
+                
                 done(callParams.res, GLOBAL.getJson(callParams.obj.youtuber_id), err);
             });
         }
@@ -230,6 +269,5 @@ var setTotalVideos = function(youtuber_id){
             GLOBAL.db_close();
             
         });
-    });
-        
+    }); 
 };

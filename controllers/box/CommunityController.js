@@ -201,7 +201,7 @@ var getArrayVideo = function (community_list_id, callback) {
     require('./../../models/Community.video');
     var CommunityVideo = GLOBAL.mongoose.model('CommunityVideo');
     
-    CommunityVideo.find({community_list_id: community_list_id, status:true})
+    CommunityVideo.find({community_list_id: community_list_id, status:true, "isPublished": true})
     .sort({registration: -1})
     .select("title description url")
     .exec(

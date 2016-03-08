@@ -1,0 +1,64 @@
+Date: 2016-03-08T20:41:32.049Z
+ uncaughtException: listen EADDRINUSE 127.0.0.1:3000
+Error: listen EADDRINUSE 127.0.0.1:3000
+    at Object.exports._errnoException (util.js:870:11)
+    at exports._exceptionWithHostPort (util.js:893:20)
+    at Server._listen2 (net.js:1236:14)
+    at listen (net.js:1272:10)
+    at net.js:1381:9
+    at GetAddrInfoReqWrap.asyncCallback [as callback] (dns.js:63:16)
+    at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:82:10)
+
+Date: 2016-03-08T20:42:04.070Z
+ uncaughtException: listen EADDRINUSE 127.0.0.1:3000
+Error: listen EADDRINUSE 127.0.0.1:3000
+    at Object.exports._errnoException (util.js:870:11)
+    at exports._exceptionWithHostPort (util.js:893:20)
+    at Server._listen2 (net.js:1236:14)
+    at listen (net.js:1272:10)
+    at net.js:1381:9
+    at GetAddrInfoReqWrap.asyncCallback [as callback] (dns.js:63:16)
+    at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:82:10)
+
+Date: 2016-03-08T20:45:04.278Z
+ uncaughtException: listen EADDRINUSE 127.0.0.1:3000
+Error: listen EADDRINUSE 127.0.0.1:3000
+    at Object.exports._errnoException (util.js:870:11)
+    at exports._exceptionWithHostPort (util.js:893:20)
+    at Server._listen2 (net.js:1236:14)
+    at listen (net.js:1272:10)
+    at net.js:1381:9
+    at GetAddrInfoReqWrap.asyncCallback [as callback] (dns.js:63:16)
+    at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:82:10)
+
+Date: 2016-03-08T20:46:45.676Z
+ uncaughtException: listen EACCES 127.0.0.1:80
+Error: listen EACCES 127.0.0.1:80
+    at Object.exports._errnoException (util.js:870:11)
+    at exports._exceptionWithHostPort (util.js:893:20)
+    at Server._listen2 (net.js:1223:19)
+    at listen (net.js:1272:10)
+    at net.js:1381:9
+    at GetAddrInfoReqWrap.asyncCallback [as callback] (dns.js:63:16)
+    at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:82:10)
+
+Date: 2016-03-08T21:19:18.021Z
+ uncaughtException: Can't set headers after they are sent.
+Error: Can't set headers after they are sent.
+    at ServerResponse.OutgoingMessage.setHeader (_http_outgoing.js:344:11)
+    at ServerResponse.res.setHeader (/Users/mac/Documents/PROJECTS/DBOX-BackEnd/node_modules/express/node_modules/connect/lib/patch.js:63:22)
+    at ServerResponse.setWriteHeadHeaders (/Users/mac/Documents/PROJECTS/DBOX-BackEnd/node_modules/express-session/node_modules/on-headers/index.js:82:19)
+    at ServerResponse.writeHead (/Users/mac/Documents/PROJECTS/DBOX-BackEnd/node_modules/express-session/node_modules/on-headers/index.js:41:36)
+    at done (/Users/mac/Documents/PROJECTS/DBOX-BackEnd/controllers/YoutuberVideoController.js:248:9)
+    at /Users/mac/Documents/PROJECTS/DBOX-BackEnd/controllers/YoutuberVideoController.js:225:17
+    at model.<anonymous> (/Users/mac/Documents/PROJECTS/DBOX-BackEnd/node_modules/mongoose/lib/document.js:1693:20)
+    at module.exports.hook.proto.(anonymous function).next_ (/Users/mac/Documents/PROJECTS/DBOX-BackEnd/node_modules/mongoose/node_modules/hooks-fixed/hooks.js:89:34)
+    at fnWrapper (/Users/mac/Documents/PROJECTS/DBOX-BackEnd/node_modules/mongoose/node_modules/hooks-fixed/hooks.js:186:18)
+    at /Users/mac/Documents/PROJECTS/DBOX-BackEnd/node_modules/mongoose/lib/model.js:263:13
+    at /Users/mac/Documents/PROJECTS/DBOX-BackEnd/node_modules/mongoose/lib/model.js:127:7
+    at /Users/mac/Documents/PROJECTS/DBOX-BackEnd/node_modules/mongoose/node_modules/mongodb/lib/collection.js:449:5
+    at /Users/mac/Documents/PROJECTS/DBOX-BackEnd/node_modules/mongoose/node_modules/mongodb/lib/collection.js:593:5
+    at /Users/mac/Documents/PROJECTS/DBOX-BackEnd/node_modules/mongoose/node_modules/mongodb/lib/bulk/unordered.js:457:9
+    at resultHandler (/Users/mac/Documents/PROJECTS/DBOX-BackEnd/node_modules/mongoose/node_modules/mongodb/lib/bulk/unordered.js:409:5)
+    at /Users/mac/Documents/PROJECTS/DBOX-BackEnd/node_modules/mongoose/node_modules/mongodb/node_modules/mongodb-core/lib/topologies/server.js:756:13
+

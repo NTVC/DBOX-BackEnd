@@ -8,13 +8,17 @@ var youtuberVideoShema = new Schema({
    
     youtuber_id: {type: Schema.ObjectId, ref: 'YoutuberSchema'},
     youtuber_list_id: {type: Schema.ObjectId, ref: 'YoutuberListSchema'},
+    title: {
+        type: String,
+        trim: true
+    },
     url: {
         type: String,
         trim: true
     },
-    title: {
-        type: String,
-        trim: true
+    isPublished: {
+        type: Boolean,
+        default: true
     },
     description: {
         type: String,

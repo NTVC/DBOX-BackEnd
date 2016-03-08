@@ -200,7 +200,7 @@ var getArrayVideo = function (tvseries_list_id, callback) {
     require('./../../models/TvSeries.video');
     var TvSeriesVideo = GLOBAL.mongoose.model('TvSeriesVideo');
     
-    TvSeriesVideo.find({tvserie_list_id: tvseries_list_id, status:true})
+    TvSeriesVideo.find({tvserie_list_id: tvseries_list_id, status:true, "isPublished": true})
     .sort({registration: -1})
     .select("title description url")
     .exec(

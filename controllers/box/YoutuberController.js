@@ -199,7 +199,7 @@ var getArrayVideo = function (youtuber_list_id, callback) {
     require('./../../models/Youtuber.video');
     var YoutuberVideo = GLOBAL.mongoose.model('YoutuberVideo');
     
-    YoutuberVideo.find({youtuber_list_id: youtuber_list_id, status:true})
+    YoutuberVideo.find({youtuber_list_id: youtuber_list_id, status:true, "isPublished": true})
     .sort({registration: -1})
     .select("title description url")
     .exec(

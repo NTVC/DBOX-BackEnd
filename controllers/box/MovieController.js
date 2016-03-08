@@ -15,6 +15,7 @@ var listAllFilter = function (params) {
             (GLOBAL.isObjectId(params.filter.search) ? { "_id" : params.filter.search } : { "title" : new RegExp(params.filter.search, 'i') }),
             (params.filter.code == '' ? {} : ({ "category" :  params.filter.code })),
             {"active" : true},
+            {"isPublished": true}
         ]
     });
     return filter;

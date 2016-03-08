@@ -1,4 +1,5 @@
 var youtuberModal = "#youtuberModal";
+var searchCommunityModal = "#searchYoutuberModal";
 var mmgYoutuberModal = "#mmgYoutuberModal";
 var addListModal = "#addListModal";
 var addVideoModal = "#addVideoModal";

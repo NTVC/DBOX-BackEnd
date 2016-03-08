@@ -23,7 +23,6 @@ exports.process = function (req, res) {
             }
         };
         
-        
         // COUNT ONLY
         if (GLOBAL.getBoolean(req.query.count)) {
             getArrayVideoCount(res, params);
@@ -69,8 +68,9 @@ var listAllFilter = function (params) {
     return filter;
 };
 
-
-// LIST ALL ADMINS ON THE DATABASE
+// ======================================= =======================================  
+// GET QUANTITY OF OBJECTS ON THE DATABASE
+// ======================================= =======================================
 var getArrayVideoCount = function (res, params) {
     GLOBAL.db_open();
     
@@ -89,7 +89,9 @@ var getArrayVideoCount = function (res, params) {
         
 };
 
-// VIDEO ALL COMMUNITIES ON THE DATABASE
+// ======================================= =======================================  
+//  LIST ALL OBJECTS ON THE DATABASE
+// ======================================= =======================================
 var getArrayVideo = function (res, params) {
     GLOBAL.db_open();
     
@@ -113,7 +115,9 @@ var getArrayVideo = function (res, params) {
     });
 };
 
+// ======================================= =======================================  
 // GET PARAMS FROM POST AND BIND AN OBJECT
+// ======================================= =======================================
 var getParamsVideo = function (req, obj) {
     
     var aux = JSON.parse(JSON.stringify(req.body));
@@ -141,7 +145,9 @@ var getParamsVideo = function (req, obj) {
     return _obj;
 }
 
-
+// ======================================= =======================================  
+// SAVE BY STEP
+// ======================================= =======================================
 var saveByStep = function (callParams){
     
     // GET OBJ
@@ -222,8 +228,9 @@ var saveByStep = function (callParams){
     }
 }
 
-
-// REMOVE VIDEO OF COMMUNITY FROM DATABASE
+// ======================================= =======================================  
+// REMOVE OBJECT FROM THE DATABASE
+// ======================================= =======================================
 var remove = function (req, res) {
     
     GLOBAL.db_open();
