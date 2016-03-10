@@ -40,7 +40,7 @@
 
               <div class="form-group">
                 <label>Model Number</label>
-                <input type="text" class="form-control" placeholder="Model Number" data-ng-model="device.model_number" maxlength="45" />
+                <input type="text" readonly class="form-control" placeholder="Model Number" data-ng-model="device.model_number" maxlength="45" />
               </div>
               <div class="form-group">
                 <label>Uid</label>
@@ -51,7 +51,7 @@
 
               <div class="form-group col-lg-6 pl0">
                 <label>Version</label>
-                <select data-ng-model="device.version_code" class="form-control">
+                <select data-ng-model="device.version_code" data-ng-change="set_model_number();" class="form-control">
                   <option data-ng-repeat="n in deviceVersions" value="{{n._id}}">{{n.title}}</option>
                 </select>
               </div>
@@ -103,32 +103,32 @@
             </div>
             <div class="modal-body hM350">
               
-						  <table class="table table-striped table-hover">
-							    <thead>
-								      <tr>
-                          <th>&nbsp;</th>
-                          <th>Title</th>
-                          <th>Registration</th>
-                          <th>&nbsp;</th>
-								      </tr>
-							    </thead>
-							    <tbody>
-                      <tr data-ng-hide="deviceVersions != null" class="text-center">
-                          <td colspan="100%"><img src="images/loading.gif" /></td>
-                      </tr>
-								      <tr data-ng-repeat="data in deviceVersions" data-ng-if="deviceVersions">
-									        <td width="45"><div class="sThumb zoom" style="background-image:url('{{data.thumb}}')"></div></td>
-									        <td>{{data.title}}</td>
-									        <td>{{data.registration | date:'MMM dd, yyyy'}}</td>
-                          <td class="text-right" width="70">
-										          <a href="javascript:;" data-ng-click="edit(data);"><span class="glyphicon glyphicon-pencil"></span></a>
-										          <a href="javascript:;" data-ng-click="delete(data);"><span class="glyphicon glyphicon-trash"></span></a>
-									        </td>
-								      </tr>
-							    </tbody>
-						  </table>
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>&nbsp;</th>
+                            <th>Title</th>
+                            <th>Registration</th>
+                            <th>&nbsp;</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr data-ng-hide="deviceVersions != null" class="text-center">
+                            <td colspan="100%"><img src="images/loading.gif" /></td>
+                        </tr>
+                        <tr data-ng-repeat="data in deviceVersions" data-ng-if="deviceVersions">
+                            <td width="45"><div class="sThumb zoom" style="background-image:url('{{data.thumb}}')"></div></td>
+                            <td>{{data.title}}</td>
+                            <td>{{data.registration | date:'MMM dd, yyyy'}}</td>
+                            <td class="text-right" width="70">
+                                <a href="javascript:;" data-ng-click="edit(data);"><span class="glyphicon glyphicon-pencil"></span></a>
+                                <a href="javascript:;" data-ng-click="delete(data);"><span class="glyphicon glyphicon-trash"></span></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
               
-              <div class="clearfix"></div>
+                <div class="clearfix"></div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-dismiss="modal" data-ng-click="edit({});">New Version</button>
@@ -147,41 +147,47 @@
             </div>
             <div class="modal-body">
 
-              <div class="pt15 alert alert-warning" data-ng-hide="deviceVersion.error == null" role="alert">
-                <div data-ng-bind-html="deviceVersion.error | unsafe"></div>
-              </div>
+                <div class="pt15 alert alert-warning" data-ng-hide="deviceVersion.error == null" role="alert">
+                    <div data-ng-bind-html="deviceVersion.error | unsafe"></div>
+                </div>
 
-              <div class="clearfix"></div>
-
-              <div class="form-group" data-ng-if="deviceVersion._id">
-                <label>Id</label>
-                <span>{{deviceVersion._id}}</span>
-              </div>
-
-              <div class="col-md-3 text-center">
-                <img src="{{deviceVersion.thumb | getImage}}" class="wMax deviceThumb" />
                 <div class="clearfix"></div>
-                <a href="javascript:;" data-ng-click="editThumb()">edit thumb</a>
-                <input id="deviceThumb" type="file" class="hidden" accept="image/*" data-key="deviceVersionModal.deviceVersion.thumb" />
-              </div>
-              <div class="col-md-9 pside0">
-                <label>Title</label>
-                <input type="text" class="form-control" placeholder="Title" data-ng-model="deviceVersion.title" maxlength="45" />
-              </div>
 
-              <div class="clearfix"></div>
+                <div class="form-group" data-ng-if="deviceVersion._id">
+                    <label>Id</label>
+                    <span>{{deviceVersion._id}}</span>
+                </div>
+                
+                <div class="clearfix"></div>
+                
+                <div class="col-md-3 text-center">
+                    <img src="{{deviceVersion.thumb | getImage}}" class="wMax deviceThumb" />
+                    <div class="clearfix"></div>
+                    <a href="javascript:;" data-ng-click="editThumb()">edit thumb</a>
+                    <input id="deviceThumb" type="file" class="hidden" accept="image/*" data-key="deviceVersionModal.deviceVersion.thumb" />
+                </div>
+                
+                <div class="form-group">
+                    <label>Title</label>
+                    <input type="text" class="form-control" placeholder="Title" data-ng-model="deviceVersion.title" maxlength="45" />
+                </div>
+                
+                <div class="form-group">
+                    <label>Model Number</label>
+                    <input type="text" class="form-control" placeholder="Model Number" data-ng-model="deviceVersion.model_number" maxlength="45" />
+                </div>
 
-              <div class="form-group">
-                <label>Description</label>
-                <textarea class="form-control" rows="7" data-ng-model="deviceVersion.description" maxlength="1000"></textarea>
-              </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea class="form-control" rows="7" data-ng-model="deviceVersion.description" maxlength="1000"></textarea>
+                </div>
 
-              <div class="form-group" data-ng-if="deviceVersion.registration">
-                <label>Registration</label>
-                <span>{{deviceVersion.registration | date:'MMM dd, yyyy'}}</span>
-              </div>
+                <div class="form-group" data-ng-if="deviceVersion.registration">
+                    <label>Registration</label>
+                    <span>{{deviceVersion.registration | date:'MMM dd, yyyy'}}</span>
+                </div>
 
-              <div class="clearfix"></div>
+                <div class="clearfix"></div>
             </div>
             <div class="modal-footer">
                 <div class="pull-left" data-ng-hide="deviceVersion.loader == null"><img src="images/loading.gif" /></div>

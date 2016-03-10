@@ -158,6 +158,7 @@ var getParamsDeviceVersion = function (req, obj) {
     _obj.title = GLOBAL.getString(aux.title); 
     _obj.description = GLOBAL.getString(aux.description);
     _obj.thumb = GLOBAL.getString(aux.thumb);
+    _obj.model_number = GLOBAL.getString(aux.model_number);
     _obj.registration = GLOBAL.getString(aux.registration);
     
     return _obj;

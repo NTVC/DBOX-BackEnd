@@ -102,7 +102,8 @@ var listAllFilter = function (params) {
                 $or : [
                     { "ethMac": new RegExp(params.filter.search, 'i') }, 
                     { "wMac": new RegExp(params.filter.search, 'i') }, 
-                    { "model_number": new RegExp(params.filter.search, 'i') }
+                    { "model_number": new RegExp(params.filter.search, 'i') },
+                    { "uid": new RegExp(params.filter.search, 'i') }
                 ]
             } : {},
             (params.filter.status == '' ? {} : ({ "status" : JSON.parse(params.filter.status) })),

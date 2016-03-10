@@ -149,6 +149,15 @@ dbox.controller('deviceModalController', function ($scope, deviceService, device
     $scope.device = null;
     $scope.deviceVersions;
     
+    $scope.set_model_number = function(){
+        
+        for (var i = 0; i < $scope.deviceVersions.length; i++) {
+            if ($scope.deviceVersions[i]._id == $scope.device.version_code) {
+                $scope.device.model_number = $scope.deviceVersions[i].model_number;
+            }
+        }
+        
+    };
     /*##############################################################*/
     // EDIT / ADD DEVICE
     $scope.edit = function (data) {
@@ -385,6 +394,8 @@ dbox.controller('deviceVersionModalController', function ($scope, deviceVersionS
         
         if (isNullorEmpty($scope.deviceVersion.title))
             error += errorTemplate('Title');
+        if (isNullorEmpty($scope.deviceVersion.model_number))
+            error += errorTemplate('Model Number');
 
         if ($.trim(error) != "") {
             scrollTop();

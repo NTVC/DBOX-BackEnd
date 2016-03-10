@@ -321,6 +321,7 @@
                                       <tr>
                                           <th>Title</th>
                                           <th>Url</th>
+                                          <th>Published</th>
                                           <th>Status</th>
                                           <th>Registration</th>
                                           <th class="text-right text-ub">Total <b class="pgCounter">{{l.filter.pg.total}}</b> items</th>
@@ -335,8 +336,9 @@
                                       </tr>
                                       <tr data-ng-repeat="video in l.videos">
                                           <td width="200">{{video.title}}</td>
-                                          <td>{{video.url}}</td>
-                                          <td><span class="text-{{video.status === true ? 'success' : 'danger'}}">{{video.status === true ? "Active" : "Inactive"}}</span></td>
+                                          <td><a data-ng-if="video.isPublished" target="_blank" href="{{video.url}}">click to open</a></td>
+                                          <td><div data-ng-bind-html="video.isPublished | isPublished | unsafe"></div></td>
+                                          <td><div data-ng-bind-html="video.status | status | unsafe"></div></td>
                                           <td>{{video.registration | date:'MMM dd, yyyy'}}</span>
                                           <td class="text-right" width="70">
                                               <a href="javascript:;" data-ng-click="edit_video(l, video);">

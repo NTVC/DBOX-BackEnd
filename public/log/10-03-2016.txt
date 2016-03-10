@@ -1,0 +1,133 @@
+Date: 2016-03-10T16:16:32.314Z
+ uncaughtException: connect ECONNREFUSED 127.0.0.1:27017
+Error: connect ECONNREFUSED 127.0.0.1:27017
+    at Object.exports._errnoException (util.js:870:11)
+    at exports._exceptionWithHostPort (util.js:893:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1062:14)
+
+Date: 2016-03-10T16:23:52.084Z
+ uncaughtException: connect ECONNREFUSED 127.0.0.1:27017
+Error: connect ECONNREFUSED 127.0.0.1:27017
+    at Object.exports._errnoException (util.js:870:11)
+    at exports._exceptionWithHostPort (util.js:893:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1062:14)
+
+Date: 2016-03-10T16:24:22.238Z
+ uncaughtException: connect ECONNREFUSED 127.0.0.1:27017
+Error: connect ECONNREFUSED 127.0.0.1:27017
+    at Object.exports._errnoException (util.js:870:11)
+    at exports._exceptionWithHostPort (util.js:893:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1062:14)
+
+Date: 2016-03-10T16:24:44.642Z
+ uncaughtException: connect ECONNREFUSED 127.0.0.1:27017
+Error: connect ECONNREFUSED 127.0.0.1:27017
+    at Object.exports._errnoException (util.js:870:11)
+    at exports._exceptionWithHostPort (util.js:893:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1062:14)
+
+Date: 2016-03-10T16:29:28.492Z
+ uncaughtException: connect ECONNREFUSED 127.0.0.1:27017
+Error: connect ECONNREFUSED 127.0.0.1:27017
+    at Object.exports._errnoException (util.js:870:11)
+    at exports._exceptionWithHostPort (util.js:893:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1062:14)
+
+Date: 2016-03-10T16:31:28.455Z
+ uncaughtException: connect ECONNREFUSED 127.0.0.1:27017
+Error: connect ECONNREFUSED 127.0.0.1:27017
+    at Object.exports._errnoException (util.js:870:11)
+    at exports._exceptionWithHostPort (util.js:893:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1062:14)
+
+Date: 2016-03-10T16:31:49.305Z
+ uncaughtException: connect ECONNREFUSED 127.0.0.1:27017
+Error: connect ECONNREFUSED 127.0.0.1:27017
+    at Object.exports._errnoException (util.js:870:11)
+    at exports._exceptionWithHostPort (util.js:893:20)
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1062:14)
+
+Date: 2016-03-10T16:52:51.775Z
+ uncaughtException: getaddrinfo ENOTFOUND undefined undefined:27017
+Error: getaddrinfo ENOTFOUND undefined undefined:27017
+    at errnoException (dns.js:26:10)
+    at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:77:26)
+
+Date: 2016-03-10T17:26:11.058Z
+ uncaughtException: getaddrinfo ENOTFOUND undefined undefined:27017
+Error: getaddrinfo ENOTFOUND undefined undefined:27017
+    at errnoException (dns.js:26:10)
+    at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:77:26)
+
+Date: 2016-03-10T17:26:12.735Z
+ uncaughtException: getaddrinfo ENOTFOUND undefined undefined:27017
+Error: getaddrinfo ENOTFOUND undefined undefined:27017
+    at errnoException (dns.js:26:10)
+    at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:77:26)
+
+Date: 2016-03-10T17:26:13.365Z
+ uncaughtException: getaddrinfo ENOTFOUND undefined undefined:27017
+Error: getaddrinfo ENOTFOUND undefined undefined:27017
+    at errnoException (dns.js:26:10)
+    at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:77:26)
+
+Date: 2016-03-10T17:26:13.773Z
+ uncaughtException: getaddrinfo ENOTFOUND undefined undefined:27017
+Error: getaddrinfo ENOTFOUND undefined undefined:27017
+    at errnoException (dns.js:26:10)
+    at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:77:26)
+
+Date: 2016-03-10T17:26:14.051Z
+ uncaughtException: getaddrinfo ENOTFOUND undefined undefined:27017
+Error: getaddrinfo ENOTFOUND undefined undefined:27017
+    at errnoException (dns.js:26:10)
+    at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:77:26)
+
+Date: 2016-03-10T17:26:14.537Z
+ uncaughtException: getaddrinfo ENOTFOUND undefined undefined:27017
+Error: getaddrinfo ENOTFOUND undefined undefined:27017
+    at errnoException (dns.js:26:10)
+    at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:77:26)
+
+Date: 2016-03-10T17:26:14.816Z
+ uncaughtException: getaddrinfo ENOTFOUND undefined undefined:27017
+Error: getaddrinfo ENOTFOUND undefined undefined:27017
+    at errnoException (dns.js:26:10)
+    at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:77:26)
+
+Date: 2016-03-10T17:26:14.970Z
+ uncaughtException: getaddrinfo ENOTFOUND undefined undefined:27017
+Error: getaddrinfo ENOTFOUND undefined undefined:27017
+    at errnoException (dns.js:26:10)
+    at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:77:26)
+
+Date: 2016-03-10T17:26:15.223Z
+ uncaughtException: getaddrinfo ENOTFOUND undefined undefined:27017
+Error: getaddrinfo ENOTFOUND undefined undefined:27017
+    at errnoException (dns.js:26:10)
+    at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:77:26)
+
+Date: 2016-03-10T17:26:15.364Z
+ uncaughtException: getaddrinfo ENOTFOUND undefined undefined:27017
+Error: getaddrinfo ENOTFOUND undefined undefined:27017
+    at errnoException (dns.js:26:10)
+    at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:77:26)
+
+Date: 2016-03-10T17:26:15.615Z
+ uncaughtException: getaddrinfo ENOTFOUND undefined undefined:27017
+Error: getaddrinfo ENOTFOUND undefined undefined:27017
+    at errnoException (dns.js:26:10)
+    at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:77:26)
+
+Date: 2016-03-10T17:26:15.856Z
+ uncaughtException: getaddrinfo ENOTFOUND undefined undefined:27017
+Error: getaddrinfo ENOTFOUND undefined undefined:27017
+    at errnoException (dns.js:26:10)
+    at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:77:26)
+
+Date: 2016-03-10T17:26:16.164Z
+ uncaughtException: getaddrinfo ENOTFOUND undefined undefined:27017
+Error: getaddrinfo ENOTFOUND undefined undefined:27017
+    at errnoException (dns.js:26:10)
+    at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:77:26)
+

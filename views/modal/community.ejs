@@ -1,123 +1,123 @@
 <div id="communityModal" class="modal fade" data-backdrop="static" data-ng-controller="communityModalController">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <h4 class="modal-title"><i class="<%= icon %>"></i> <%= title %></h4>
-      </div>
-      <div class="modal-body">
-
-        <div class="pt15 alert alert-warning" data-ng-hide="community.error == null" role="alert">
-          <div data-ng-bind-html="community.error | unsafe"></div>
-        </div>
-
-        <div class="form-group">
-          <label>Title</label>
-          <input type="text" class="form-control" placeholder="Title" data-ng-model="community.title" maxlength="50" />
-        </div>
-        
-        <div class="clearfix"></div>
-
-        <div class="col-xs-12 col-lg-4 text-center">
-          <div class="pic" style="background:url('{{community.thumb | getImage}}');"></div>
-          <div class="clearfix"></div>
-          <a href="javascript:;" onclick="getFileThumb('#communityThumb')">edit thumb</a>
-          <input id="communityThumb" onchange="readURL(this, '#communityThumb');" type="file" class="hidden" accept="image/*" data-key="communityModal.community.thumb" />
-        </div>
-
-        <div class="col-xs-12 col-lg-4 text-center">
-          <div class="pic" style="background:url('{{community.cover | getImage}}');"></div>
-          <div class="clearfix"></div>
-          <a href="javascript:;" onclick="getFileThumb('#communityCover')">edit cover</a>
-          <input id="communityCover" onchange="readURL(this, '#communityCover');" type="file" class="hidden" accept="image/*" data-key="communityModal.community.cover" />
-        </div>
-        
-        <div class="col-xs-12 col-lg-4 text-center">
-          <div class="pic" style="background:url('{{community.background | getImage}}');"></div>
-          <div class="clearfix"></div>
-          <a href="javascript:;" onclick="getFileThumb('#communityBackground')">edit background</a>
-          <input id="communityBackground" onchange="readURL(this, '#communityBackground');" type="file" class="hidden" accept="image/*" data-key="communityModal.community.background" />
-        </div>
-
-        <div class="clearfix"></div>
-
-        <div class="form-group">
-          <label>Category</label>
-          <div class="clearfix"></div>
-          <div ng-repeat="data in categories" class="col-xs-12 col-md-4 col-lg-4 pside0">
-            <label class="text-ub">
-              <input
-                type="checkbox"
-                name="categories[]"
-                value="data.id"
-                ng-checked="community.category.indexOf(data.id) > -1"
-                ng-click="toggleSelection(data.id, true)" class="" />
-              {{data.title}}
-            </label>
-          </div>
-          <div class="clearfix"></div>
-        </div>
-
-        <div class="clearfix"></div>
-        
-        <div class="form-group">
-            <label>Language</label>
-            <div class="clearfix"></div>
-            <div ng-repeat="data in languages" class="col-xs-12 col-md-4 col-lg-4 pside0">
-                <label class="text-ub">
-                <input
-                type="checkbox"
-                name="languages[]"
-                value="data.code"
-                ng-checked="community.language.indexOf(data.code) > -1"
-                ng-click="toggleSelection(data.code, false)" />
-                {{data.name}}
-                </label>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title"><i class="<%= icon %>"></i> <%= title %></h4>
             </div>
-            <div class="clearfix"></div>
-        </div>
+            <div class="modal-body">
 
-        <div class="clearfix"></div>
+                <div class="pt15 alert alert-warning" data-ng-hide="community.error == null" role="alert">
+                    <div data-ng-bind-html="community.error | unsafe"></div>
+                </div>
+
+                <div class="form-group">
+                    <label>Title</label>
+                    <input type="text" class="form-control" placeholder="Title" data-ng-model="community.title" maxlength="50" />
+                </div>
         
-        <div class="form-group">
-          <label>Tags</label>
-          <textarea class="form-control" data-ng-model="community.tags" rows="3"></textarea>
-        </div>
+                <div class="clearfix"></div>
 
-        <div class="form-group">
-          <label>Description</label>
-          <textarea class="form-control" data-ng-model="community.description" rows="5"></textarea>
-        </div>
+                <div class="col-xs-12 col-lg-4 text-center">
+                    <div class="pic" style="background:url('{{community.thumb | getImage}}');"></div>
+                    <div class="clearfix"></div>
+                    <a href="javascript:;" onclick="getFileThumb('#communityThumb')">edit thumb</a>
+                    <input id="communityThumb" onchange="readURL(this, '#communityThumb');" type="file" class="hidden" accept="image/*" data-key="communityModal.community.thumb" />
+                </div>
 
-        <div class="col-lg-6 col-xs-12 pl0">
-          <label>Country</label>
-          <select class="form-control" data-ng-model="community.country">
-            <option value="{{c.code}}" data-ng-repeat="c in countries">{{c.name}}</option>
-          </select>
-        </div>
+                <div class="col-xs-12 col-lg-4 text-center">
+                    <div class="pic" style="background:url('{{community.cover | getImage}}');"></div>
+                    <div class="clearfix"></div>
+                    <a href="javascript:;" onclick="getFileThumb('#communityCover')">edit cover</a>
+                    <input id="communityCover" onchange="readURL(this, '#communityCover');" type="file" class="hidden" accept="image/*" data-key="communityModal.community.cover" />
+                </div>
+        
+                <div class="col-xs-12 col-lg-4 text-center">
+                    <div class="pic" style="background:url('{{community.background | getImage}}');"></div>
+                    <div class="clearfix"></div>
+                    <a href="javascript:;" onclick="getFileThumb('#communityBackground')">edit background</a>
+                    <input id="communityBackground" onchange="readURL(this, '#communityBackground');" type="file" class="hidden" accept="image/*" data-key="communityModal.community.background" />
+                </div>
 
-        <div class="col-lg-6 col-xs-12 pside0">
-          <label>Status</label>
-          <select data-ng-model="community.status" class="form-control" data-bool-value="">
-            <option value="true" selected="">Active</option>
-            <option value="false">Inactive</option>
-          </select>
-        </div>
+                <div class="clearfix"></div>
 
-        <div class="clearfix"></div>
-      </div>
-      <div class="modal-footer">
-        <div class="pull-left" data-ng-hide="community.loader == null">
-          <img src="images/loading.gif" />
+                <div class="form-group">
+                    <label>Category</label>
+                    <div class="clearfix"></div>
+                    <div ng-repeat="data in categories" class="col-xs-12 col-md-4 col-lg-4 pside0">
+                        <label class="text-ub">
+                        <input
+                            type="checkbox"
+                            name="categories[]"
+                            value="data.id"
+                            ng-checked="community.category.indexOf(data.id) > -1"
+                            ng-click="toggleSelection(data.id, true)" class="" />
+                        {{data.title}}
+                        </label>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div class="clearfix"></div>
+        
+                <div class="form-group">
+                    <label>Language</label>
+                    <div class="clearfix"></div>
+                    <div ng-repeat="data in languages" class="col-xs-12 col-md-4 col-lg-4 pside0">
+                        <label class="text-ub">
+                        <input
+                        type="checkbox"
+                        name="languages[]"
+                        value="data.code"
+                        ng-checked="community.language.indexOf(data.code) > -1"
+                        ng-click="toggleSelection(data.code, false)" />
+                        {{data.name}}
+                        </label>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div class="clearfix"></div>
+        
+                <div class="form-group">
+                    <label>Tags</label>
+                    <textarea class="form-control" data-ng-model="community.tags" rows="3"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea class="form-control" data-ng-model="community.description" rows="5"></textarea>
+                </div>
+
+                <div class="col-lg-6 col-xs-12 pl0">
+                    <label>Country</label>
+                    <select class="form-control" data-ng-model="community.country">
+                        <option value="{{c.code}}" data-ng-repeat="c in countries">{{c.name}}</option>
+                    </select>
+                </div>
+
+                <div class="col-lg-6 col-xs-12 pside0">
+                    <label>Status</label>
+                    <select data-ng-model="community.status" class="form-control" data-bool-value="">
+                        <option value="true" selected="">Active</option>
+                        <option value="false">Inactive</option>
+                    </select>
+                </div>
+
+                <div class="clearfix"></div>
+            </div>
+            <div class="modal-footer">
+                <div class="pull-left" data-ng-hide="community.loader == null">
+                    <img src="images/loading.gif" />
+                </div>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-default" data-ng-if="community.search" data-dismiss="modal" data-toggle="modal" data-target="#searchCommunityModal">Back</button>
+                <button type="button" class="btn btn-primary" data-ng-disabled="community.loader != null" data-ng-click="save();">Save</button>
+            </div>
         </div>
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-default" data-ng-if="community.search" data-dismiss="modal" data-toggle="modal" data-target="#searchCommunityModal">Back</button>
-        <button type="button" class="btn btn-primary" data-ng-disabled="community.loader != null" data-ng-click="save();">Save</button>
-      </div>
     </div>
-  </div>
 </div>
 <div id="mmgCommunityModal" class="modal fade" data-backdrop="static" data-ng-controller="mmgCommunityModalController">
   <div class="modal-dialog">
@@ -238,6 +238,7 @@
                                       <tr>
                                           <th>Title</th>
                                           <th>Url</th>
+                                          <th>Published</th>
                                           <th>Status</th>
                                           <th>Registration</th>
                                           <th class="text-right text-ub">Total <b class="pgCounter">{{l.filter.pg.total}}</b> items</th>
@@ -252,8 +253,9 @@
                                       </tr>
                                       <tr data-ng-repeat="video in l.videos">
                                           <td width="200">{{video.title}}</td>
-                                          <td>{{video.url}}</td>
-                                          <td><span class="text-{{video.status === true ? 'success' : 'danger'}}">{{video.status === true ? "Active" : "Inactive"}}</span></td>
+                                          <td><a data-ng-if="video.isPublished" target="_blank" href="{{video.url}}">click to open</a></td>
+                                          <td><div data-ng-bind-html="video.isPublished | isPublished | unsafe"></div></td>
+                                          <td><div data-ng-bind-html="video.status | status | unsafe"></div></td>
                                           <td>{{video.registration | date:'MMM dd, yyyy'}}</span>
                                           <td class="text-right" width="70">
                                               <a href="javascript:;" data-ng-click="edit_video(l, video);">
