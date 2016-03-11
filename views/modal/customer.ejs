@@ -7,135 +7,136 @@
             </div>
             <div class="modal-body">
               
-              <div class="pt15 alert alert-warning" data-ng-hide="customer.error == null" role="alert">
-                  <div data-ng-bind-html="customer.error | unsafe"></div>
-              </div>
+                <div class="pt15 alert alert-warning" data-ng-hide="customer.error == null" role="alert">
+                    <div data-ng-bind-html="customer.error | unsafe"></div>
+                </div>
               
-              <div class="clearfix"></div>
+                <div class="clearfix"></div>
 
-              <div class="col-xs-12 pside0">
-                <div class="panel panel-default">
+                <div class="col-xs-12 pside0">
+                    <div class="panel panel-default">
 
-                  <div class="panel-heading">Basic Info</div>
-                  <div class="panel-body">
-                    <div class="form-group">
-                      <label>Id</label>
-                      <span>{{customer._id}}</span>
+                        <div class="panel-heading">Basic Info</div>
+                        
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <label>Id</label>
+                                <span>{{customer._id}}</span>
+                            </div>
+
+                            <div class="clearfix"></div>
+
+                            <div class="form-group col-lg-6 pl0">
+                                <label>First Name</label>
+                                <input type="text" class="form-control" placeholder="First Name" data-ng-model="customer.firstname" maxlength="45" />
+                            </div>
+                            <div class="form-group col-lg-6 pl0 pr0">
+                                <label>Last Name</label>
+                                <input type="text" class="form-control" placeholder="Last Name" data-ng-model="customer.lastname" maxlength="45" />
+                            </div>
+
+                            <div class="clearfix"></div>
+
+                            <div class="form-group col-lg-6 pl0">
+                                <label>E-mail</label>
+                                <input type="text" class="form-control" placeholder="E-mail" data-ng-model="customer.mail" maxlength="100" />
+                            </div>
+                            <div class="form-group col-lg-6 pl0 pr0">
+                                <label>Phone</label>
+                                <input type="text" class="form-control" placeholder="Phone" data-ng-model="customer.phone" maxlength="45" />
+                            </div>
+
+                            <div class="clearfix"></div>
+
+                            <div class="form-group">
+                                <label>Language</label>
+                                <div class="clearfix"></div>
+                                <div ng-repeat="data in languages" class="col-xs-12 col-md-4 col-lg-4 pside0">
+                                    <label class="text-ub">
+                                    <input
+                                        type="checkbox"
+                                        name="languages[]"
+                                        value="data.code"
+                                        ng-checked="customer.language.indexOf(data.code) > -1"
+                                        ng-click="toggleSelection(data.code)" />
+                                    {{data.name}}
+                                    </label>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+
+                            <div class="clearfix"></div>
+
+                            <div class="form-group col-lg-6 pl0">
+                                <label>Status</label>
+                                <select data-ng-model="customer.status" class="form-control" data-bool-value="">
+                                    <option value="true" selected="">Active</option>
+                                    <option value="false">Inactive</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group col-lg-6 pl0 pr0" data-ng-if="customer.registration">
+                                <label>Registration</label>
+                                <span class="clearfix">{{customer.registration | date:'MMM dd, yyyy'}}</span>
+                            </div>
+
+                        </div>
                     </div>
-
-                    <div class="clearfix"></div>
-
-                    <div class="form-group col-lg-6 pl0">
-                      <label>First Name</label>
-                      <input type="text" class="form-control" placeholder="First Name" data-ng-model="customer.firstname" maxlength="45" />
-                    </div>
-                    <div class="form-group col-lg-6 pl0 pr0">
-                      <label>Last Name</label>
-                      <input type="text" class="form-control" placeholder="Last Name" data-ng-model="customer.lastname" maxlength="45" />
-                    </div>
-
-                    <div class="clearfix"></div>
-
-                    <div class="form-group col-lg-6 pl0">
-                      <label>E-mail</label>
-                      <input type="text" class="form-control" placeholder="E-mail" data-ng-model="customer.mail" maxlength="100" />
-                    </div>
-                    <div class="form-group col-lg-6 pl0 pr0">
-                      <label>Phone</label>
-                      <input type="text" class="form-control" placeholder="Phone" data-ng-model="customer.phone" maxlength="45" />
-                    </div>
-
-                    <div class="clearfix"></div>
-
-                    <div class="form-group">
-                      <label>Language</label>
-                      <div class="clearfix"></div>
-                      <div ng-repeat="data in languages" class="col-xs-12 col-md-4 col-lg-4 pside0">
-                        <label class="text-ub">
-                          <input
-                            type="checkbox"
-                            name="languages[]"
-                            value="data.code"
-                            ng-checked="customer.language.indexOf(data.code) > -1"
-                            ng-click="toggleSelection(data.code)" />
-                          {{data.name}}
-                        </label>
-                      </div>
-                      <div class="clearfix"></div>
-                    </div>
-
-                    <div class="clearfix"></div>
-
-                    <div class="form-group col-lg-6 pl0">
-                      <label>Status</label>
-                      <select data-ng-model="customer.status" class="form-control" data-bool-value="">
-                        <option value="true" selected="">Active</option>
-                        <option value="false">Inactive</option>
-                      </select>
-                    </div>
-
-                    <div class="form-group col-lg-6 pl0 pr0" data-ng-if="customer.registration">
-                      <label>Registration</label>
-                      <span class="clearfix">{{customer.registration | date:'MMM dd, yyyy'}}</span>
-                    </div>
-
-                  </div>
                 </div>
-              </div>
 
-              <div class="col-xs-12 pside0">
-                <div class="panel panel-default">
-                  <div class="panel-heading">Address</div>
-                  <div class="panel-body">
+                <div class="col-xs-12 pside0">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Address</div>
+                        <div class="panel-body">
 
-                    <div class="form-group col-lg-12 pl0 pr0">
-                        <label>Search</label>
-                        <input type="text" class="form-control" id="autocomplete" onFocus="geolocate()" placeholder="Enter your address" />
-                    </div>
-                    <div class="form-group col-lg-3 pl0">
-                        <label>Number</label>
-                        <input id="street_number" type="text" class="form-control" placeholder="Number" data-ng-model="customer.address.number" maxlength="45" />
-                    </div>
-                    <div class="form-group col-lg-9 pl0 pr0">
-                      <label>Street</label>
-                      <input id="route" type="text" class="form-control" placeholder="Street" data-ng-model="customer.address.street" />
-                    </div>
+                            <div class="form-group col-lg-12 pl0 pr0">
+                                <label>Search</label>
+                                <input type="text" class="form-control" id="autocomplete" onFocus="geolocate()" placeholder="Enter your address" />
+                            </div>
+                            <div class="form-group col-lg-3 pl0">
+                                <label>Number</label>
+                                <input id="street_number" type="text" class="form-control" placeholder="Number" data-ng-model="customer.address.number" maxlength="45" />
+                            </div>
+                            <div class="form-group col-lg-9 pl0 pr0">
+                                <label>Street</label>
+                                <input id="route" type="text" class="form-control" placeholder="Street" data-ng-model="customer.address.street" />
+                            </div>
 
-                    <div class="clearfix"></div>
-                    
-                    <div class="form-group col-lg-12 pl0 pr0">
-                        <label>City</label>
-                        <input id="locality" type="text" class="form-control" placeholder="City" data-ng-model="customer.address.city" />
-                    </div>
+                            <div class="clearfix"></div>
+                            
+                            <div class="form-group col-lg-12 pl0 pr0">
+                                <label>City</label>
+                                <input id="locality" type="text" class="form-control" placeholder="City" data-ng-model="customer.address.city" />
+                            </div>
 
-                    <div class="clearfix"></div>
-                    
-                    <div class="form-group col-lg-6 pl0">
-                      <label>State</label>
-                      <input id="administrative_area_level_1" type="text" class="form-control" placeholder="State" data-ng-model="customer.address.state" />
-                    </div>
+                            <div class="clearfix"></div>
+                            
+                            <div class="form-group col-lg-6 pl0">
+                                <label>State</label>
+                                <input id="administrative_area_level_1" type="text" class="form-control" placeholder="State" data-ng-model="customer.address.state" />
+                            </div>
 
-                    <div class="form-group col-lg-6 pl0 pr0">
-                      <label>Zip Code</label>
-                      <input id="postal_code" type="text" class="form-control" placeholder="Zip Code" data-ng-model="customer.address.zipcode" maxlength="45" />
-                    </div>
+                            <div class="form-group col-lg-6 pl0 pr0">
+                                <label>Zip Code</label>
+                                <input id="postal_code" type="text" class="form-control" placeholder="Zip Code" data-ng-model="customer.address.zipcode" maxlength="45" />
+                            </div>
 
-                    <div class="clearfix"></div>
+                            <div class="clearfix"></div>
 
-                    <div class="form-group col-lg-6 pl0">
-                      <label>Complement</label>
-                      <input type="text" class="form-control" placeholder="Complement" data-ng-model="customer.address.complement" />
+                            <div class="form-group col-lg-6 pl0">
+                                <label>Complement</label>
+                                <input type="text" class="form-control" placeholder="Complement" data-ng-model="customer.address.complement" />
+                            </div>
+                            
+                            <div class="form-group col-lg-6 pl0">
+                            <label>Country</label>
+                            <select id="country" class="form-control" data-ng-model="customer.address.country">
+                                <option data-ng-repeat="data in countries" value="{{data.code}}">{{data.name}}</option>
+                            </select>
+                            </div>
+                        
+                        </div>
                     </div>
-                    
-                    <div class="form-group col-lg-6 pl0">
-                      <label>Country</label>
-                      <select id="country" class="form-control" data-ng-model="customer.address.country">
-                        <option data-ng-repeat="data in countries" value="{{data.code}}">{{data.name}}</option>
-                      </select>
-                    </div>
-                  
-                  </div>
-                </div>
               </div>
 
               <div class="clearfix"></div>
