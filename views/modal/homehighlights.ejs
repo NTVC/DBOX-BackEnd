@@ -68,7 +68,7 @@
         <div class="form-group col-xs-12 pside0">
             <label>Type</label>
             <div class="clearfix"></div>
-            <select class="form-control pull-left w150" data-ng-model="content.type">
+            <select class="form-control pull-left w150" data-ng-change="search()" data-ng-model="content.type">
                 <option data-ng-repeat="t in contentTypes" value="{{t.code}}">{{t.type}}</option>
             </select>
             <div class="pull-left ml10">
