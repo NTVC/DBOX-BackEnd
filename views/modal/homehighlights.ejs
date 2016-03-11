@@ -1,131 +1,131 @@
 <div id="addListModal" class="modal fade" data-backdrop="static" data-ng-controller="addListModalController">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <h4 class="modal-title">Add List</h4>
-      </div>
-      <div class="modal-body">
-        <div class="pt15 alert alert-warning" data-ng-hide="list.error == null" role="alert">
-          <div data-ng-bind-html="list.error | unsafe"></div>
-        </div>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Add List</h4>
+            </div>
+            <div class="modal-body">
+                <div class="pt15 alert alert-warning" data-ng-hide="list.error == null" role="alert">
+                    <div data-ng-bind-html="list.error | unsafe"></div>
+                </div>
 
-        <div class="form-group">
-          <label>Title</label>
-          <input type="text" class="form-control" placeholder="Title" data-ng-model="list.title" maxlength="200" />
-        </div>
-        <div class="form-group">
-          <label>Description</label>
-          <textarea class="form-control" data-ng-model="list.description" rows="7" maxlength="1000"></textarea>
-        </div>
+                <div class="form-group">
+                    <label>Title</label>
+                    <input type="text" class="form-control" placeholder="Title" data-ng-model="list.title" maxlength="200" />
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea class="form-control" data-ng-model="list.description" rows="7" maxlength="1000"></textarea>
+                </div>
 
-        <div class="clearfix"></div>
-        
-        <div class="form-group col-xs-4 pside0">
-            <label>Source</label>
-            <select class="form-control" data-ng-model="list.source" data-ng-disabled="list._id">
-                <option data-ng-repeat="data in sources" value="{{data.code}}">{{data.title}}</option>
-            </select>
-        </div>
-        <div class="form-group col-xs-4">
-            <label>Status</label>
-            <select data-ng-model="list.status" class="form-control w150" data-bool-value="">
-              <option value="true" selected="">Active</option>
-              <option value="false">Inactive</option>
-            </select>
-        </div>
+                <div class="clearfix"></div>
+                
+                <div class="form-group col-xs-4 pside0">
+                    <label>Source</label>
+                    <select class="form-control" data-ng-model="list.source" data-ng-disabled="list._id">
+                        <option data-ng-repeat="data in sources" value="{{data.code}}">{{data.title}}</option>
+                    </select>
+                </div>
+                <div class="form-group col-xs-4">
+                    <label>Status</label>
+                    <select data-ng-model="list.status" class="form-control w150" data-bool-value="">
+                        <option value="true" selected="">Active</option>
+                        <option value="false">Inactive</option>
+                    </select>
+                </div>
 
-        <div class="clearfix"></div>
-      </div>
-      <div class="modal-footer">
-        <div class="pull-left" data-ng-hide="list.loader == null">
-          <img src="images/loading.gif" />
+                <div class="clearfix"></div>
+            </div>
+            <div class="modal-footer">
+                <div class="pull-left" data-ng-hide="list.loader == null">
+                    <img src="images/loading.gif" />
+                </div>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-ng-disabled="list.loader != null" data-ng-click="save($index);">Save</button>
+            </div>
         </div>
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" data-ng-disabled="list.loader != null" data-ng-click="save($index);">Save</button>
-      </div>
     </div>
-  </div>
 </div>
 
 <div id="addContentModal" class="modal fade" data-backdrop="static" data-ng-controller="addContentModalController">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <h4 class="modal-title">Add Content</h4>
-      </div>
-      <div class="modal-body">
-        <div class="pt15 alert alert-warning" data-ng-hide="content.error == null" role="alert">
-            <div data-ng-bind-html="content.error | unsafe"></div>
-        </div>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Add Content</h4>
+            </div>
+            <div class="modal-body">
+                <div class="pt15 alert alert-warning" data-ng-hide="content.error == null" role="alert">
+                    <div data-ng-bind-html="content.error | unsafe"></div>
+                </div>
         
-        <div class="clearfix"></div>
-        <div class="form-group col-xs-12 pside0">
-            <label>Type</label>
-            <div class="clearfix"></div>
-            <select class="form-control pull-left w150" data-ng-change="search()" data-ng-model="content.type">
-                <option data-ng-repeat="t in contentTypes" value="{{t.code}}">{{t.type}}</option>
-            </select>
-            <div class="pull-left ml10">
-              <button type="button" class="btn btn-primary" data-ng-disabled="highlight.loader != null"  data-ng-if="content.type == '1'" data-ng-click="random();">Save</button>
+                <div class="clearfix"></div>
+                <div class="form-group col-xs-12 pside0">
+                    <label>Type</label>
+                    <div class="clearfix"></div>
+                    <select class="form-control pull-left w150" data-ng-change="search()" data-ng-model="content.type">
+                        <option data-ng-repeat="t in contentTypes" value="{{t.code}}">{{t.type}}</option>
+                    </select>
+                    <div class="pull-left ml10">
+                        <button type="button" class="btn btn-primary" data-ng-disabled="highlight.loader != null"  data-ng-if="content.type == '1'" data-ng-click="random();">Save</button>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+
+                <div data-ng-if="content.type == '2'" class="pt15">
+            
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Filter information</div>
+                        <div class="panel-body">
+						
+                            <div class="col-xs-12 col-lg-9 mb10">
+                                <div class="input-group">
+                                    <span class="input-group-addon">Search</span>
+                                    <input type="text" class="form-control" data-ng-model="filter.search" maxlength="30" data-ng-enter="search()" />
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-lg-3 mb10">
+                                <button type="button" class="btn btn-primary" data-ng-click="search();">Go</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default hM500">
+                        <div class="panel-body">
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>&nbsp;</th>
+                                        <th>&nbsp;</th>
+                                        <th>Title</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr data-ng-show="lstContent == null" class="text-center">
+                                        <td colspan="100%"><img src="images/loading.gif" /></td>
+                                    </tr>
+                                    <tr data-ng-repeat="data in lstContent">
+                                        <td><button type="button" class="btn btn-small btn-primary" data-ng-disabled="highlight.loader != null" data-ng-click="add(data);">Choose</button></td>
+                                        <td width="45"><div class="sThumb zoom" style="background-image:url('{{data.cover}}')"></div></td>
+                                        <td>{{data.title}}{{data.name}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+				    </div>
+                </div>
+                <div class="clearfix"></div>
+                
+            </div>
+            <div class="modal-footer">
+                <div class="pull-left" data-ng-hide="highlight.loader == null"><img src="images/loading.gif" /></div>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>
-        <div class="clearfix"></div>
-
-          <div data-ng-if="content.type == '2'" class="pt15">
-            
-				    <div class="panel panel-default">
-					      <div class="panel-heading">Filter information</div>
-					      <div class="panel-body">
-						
-						        <div class="col-xs-12 col-lg-9 mb10">
-							          <div class="input-group">
-								            <span class="input-group-addon">Search</span>
-								            <input type="text" class="form-control" data-ng-model="filter.search" maxlength="30" data-ng-enter="search()" />
-							          </div>
-						        </div>
-						        <div class="col-xs-12 col-lg-3 mb10">
-							          <button type="button" class="btn btn-primary" data-ng-click="search();">Go</button>
-						        </div>
-					      </div>
-				    </div>
-            <div class="panel panel-default hM500">
-					      <div class="panel-body">
-						        <table class="table table-striped table-hover">
-							          <thead>
-								            <tr>
-                                <th>&nbsp;</th>
-                                <th>&nbsp;</th>
-                                <th>Title</th>
-								            </tr>
-							          </thead>
-							          <tbody>
-                            <tr data-ng-show="lstContent == null" class="text-center">
-                              <td colspan="100%"><img src="images/loading.gif" /></td>
-                            </tr>
-								            <tr data-ng-repeat="data in lstContent">
-                                <td><button type="button" class="btn btn-small btn-primary" data-ng-disabled="highlight.loader != null" data-ng-click="add(data);">Choose</button></td>
-									              <td width="45"><div class="sThumb zoom" style="background-image:url('{{data.cover}}')"></div></td>
-									              <td>{{data.title}}{{data.name}}</td>
-								            </tr>
-							          </tbody>
-						        </table>
-					      </div>
-				    </div>
-        </div>
-        
-        <div class="clearfix"></div>
-      </div>
-      <div class="modal-footer">
-          <div class="pull-left" data-ng-hide="highlight.loader == null"><img src="images/loading.gif" /></div>
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
     </div>
-  </div>
 </div>
 
